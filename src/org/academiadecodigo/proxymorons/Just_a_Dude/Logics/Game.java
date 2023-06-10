@@ -18,6 +18,7 @@ public class Game {
         background = new Background();
         dude = new Dude(new Position(background.getWidth()/2, background.getHeight()/2 ));
         myKeyboardHandler = new MyKeyboardHandler(dude);
+
     }
 
     public void start() {
@@ -25,6 +26,8 @@ public class Game {
         background.start();
         dude.draw();
         myKeyboardHandler.init();
-
+        AnimationLoop loop = new AnimationLoop();
+        loop.setDude(dude);
+        loop.start();
     }
 }
