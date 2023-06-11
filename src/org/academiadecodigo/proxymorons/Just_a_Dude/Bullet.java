@@ -1,8 +1,10 @@
 package org.academiadecodigo.proxymorons.Just_a_Dude;
 
+import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Direction;
+import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Entity;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
-public class Bullet {
+public class Bullet extends Entity {
     private Rectangle bulletSprite;
     private boolean connected;
 
@@ -19,5 +21,15 @@ public class Bullet {
 
     public void setConnected(boolean connected) {
         this.connected = connected;
+    }
+
+    @Override
+    public void move(Direction direction) {
+
+    }
+
+    @Override
+    public void hit() {
+
     }
 }

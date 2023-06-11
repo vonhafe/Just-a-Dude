@@ -5,7 +5,7 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Bullet;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
-public class Dude implements Character, Shooter {
+public class Dude extends Character implements Shooter {
     private int health = 100;
     private Position position;
     private Bullet bullet;
