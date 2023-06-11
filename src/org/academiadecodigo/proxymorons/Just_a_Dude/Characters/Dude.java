@@ -64,4 +64,7 @@ switch (direction){
         health--;
     }
 
+    public Position getPosition() {
+        return position;
+    }
 }
