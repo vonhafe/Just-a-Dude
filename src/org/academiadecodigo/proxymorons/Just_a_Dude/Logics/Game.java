@@ -4,6 +4,7 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Dude;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Enemy.Enemy;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.MyKeyboardHandler;
+import org.academiadecodigo.simplegraphics.graphics.Canvas;
 
 import java.util.LinkedList;
 
@@ -18,6 +19,7 @@ public class Game {
         background = new Background();
         dude = new Dude(new Position(background.getWidth()/2, background.getHeight()/2 ));
         myKeyboardHandler = new MyKeyboardHandler(dude);
+
 
     }
 
