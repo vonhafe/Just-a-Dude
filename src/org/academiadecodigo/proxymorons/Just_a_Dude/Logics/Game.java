@@ -30,7 +30,6 @@ public class Game {
     }
 
     public void start() {
-
         background.start();
         dude.draw();
         myKeyboardHandler.init();

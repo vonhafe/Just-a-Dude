@@ -25,4 +25,9 @@ public class Position {
     public void setyAxis(int yAxis) {
         this.yAxis = yAxis;
     }
+
+    @Override
+    public String toString() {
+        return "\nx: " + xAxis + "\ny: " + yAxis;
+    }
 }

@@ -14,6 +14,7 @@ public class Dude extends Character implements Shooter {
     public final static int SPEED = 5;
 
     public Dude(Position position) {
+
         this.direction = Direction.DOWN;
         this.position = position;
         sprite = new Rectangle(position.getxAxis(), position.getyAxis(), 20, 40);
@@ -70,5 +71,10 @@ public class Dude extends Character implements Shooter {
 
     public Position getPosition() {
         return position;
+    }
+
+
+    public Position[] getHitBox() {
+        return super.getHitBox();
     }
 }
