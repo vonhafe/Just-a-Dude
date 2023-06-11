@@ -44,8 +44,6 @@ switch (direction){
 
     }
 
-    public void hit(){
-        health--;
-    }
+    public void hit(){health--;}
 
 }
