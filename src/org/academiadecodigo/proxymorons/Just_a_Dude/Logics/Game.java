@@ -1,5 +1,6 @@
 package org.academiadecodigo.proxymorons.Just_a_Dude.Logics;
 
+import org.academiadecodigo.proxymorons.Just_a_Dude.Bullet;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Dude;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Enemy.Enemy;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
@@ -12,6 +13,7 @@ public class Game {
     private Background background;
     private Dude dude;
     private LinkedList<Enemy> enemies;
+    public static LinkedList<Bullet> bullets = new LinkedList<>();
     private MyKeyboardHandler myKeyboardHandler;
 
 
@@ -29,7 +31,6 @@ public class Game {
         dude.draw();
         myKeyboardHandler.init();
         AnimationLoop loop = new AnimationLoop();
-        loop.setDude(dude);
         loop.start();
     }
 }
