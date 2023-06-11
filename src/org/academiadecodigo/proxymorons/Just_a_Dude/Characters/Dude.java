@@ -8,54 +8,48 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class Dude extends Character implements Shooter {
     private int health = 100;
-    private Position position;
-    private Direction direction;
-    private Rectangle sprite;
     public final static int SPEED = 5;
 
     public Dude(Position position) {
-
-        this.direction = Direction.DOWN;
-        this.position = position;
-        sprite = new Rectangle(position.getxAxis(), position.getyAxis(), 20, 40);
+        super(position,Direction.UP,new Rectangle(position.getxAxis(), position.getyAxis(), 20, 40));
     }
 
     public void draw() {
-        sprite.setColor(Color.BLUE);
-        sprite.fill();
+        getSprite().setColor(Color.BLUE);
+        getSprite().fill();
     }
 
 
     public void move(Direction direction) {
         switch (direction) {
             case UP:
-                this.direction = Direction.UP;
-                sprite.translate(0, -SPEED);
-                position.setyAxis(position.getyAxis() - SPEED);
+                setDirection(Direction.UP);
+                getSprite().translate(0, -SPEED);
+                getPosition().setyAxis(getPosition().getyAxis() - SPEED);
                 break;
             case RIGHT:
-                this.direction = Direction.RIGHT;
-                sprite.translate(SPEED, 0);
-                position.setxAxis(position.getxAxis() + SPEED);
+                setDirection(Direction.RIGHT);
+                getSprite().translate(SPEED, 0);
+                getPosition().setxAxis(getPosition().getxAxis() + SPEED);
                 break;
             case DOWN:
-                this.direction = Direction.DOWN;
-                sprite.translate(0, SPEED);
-                position.setyAxis(position.getyAxis() + SPEED);
+                setDirection(Direction.DOWN);
+                getSprite().translate(0, SPEED);
+                getPosition().setyAxis(getPosition().getyAxis() + SPEED);
                 break;
             case LEFT:
-                this.direction = Direction.LEFT;
-                sprite.translate(-SPEED, 0);
-                position.setxAxis(position.getxAxis() - SPEED);
+                setDirection(Direction.LEFT);
+                getSprite().translate(-SPEED, 0);
+                getPosition().setxAxis(getPosition().getxAxis() - SPEED);
                 break;
         }
     }
 
     public void shoot() {
-        Rectangle bulletSprite = new Rectangle(sprite.getX(), sprite.getY(), 10, 10);
+        Rectangle bulletSprite = new Rectangle(getSprite().getX(), getSprite().getY(), 10, 10);
         bulletSprite.draw();
         Position tempPos = new Position(getPosition().getxAxis(), getPosition().getyAxis());
-        Bullet bullet = new Bullet(bulletSprite, direction, tempPos);
+        Bullet bullet = new Bullet(bulletSprite, getDirection(), tempPos);
         Game.bullets.add(bullet);
     }
 
@@ -63,16 +57,6 @@ public class Dude extends Character implements Shooter {
     public void hit() {
         health--;
     }
-
-
-    public Direction getDirection() {
-        return direction;
-    }
-
-    public Position getPosition() {
-        return position;
-    }
-
 
     public Position[] getHitBox() {
         return super.getHitBox();

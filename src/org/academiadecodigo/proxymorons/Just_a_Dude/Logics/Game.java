@@ -13,6 +13,8 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.MyKeyboardHandler;
 
 import java.util.LinkedList;
 
+import static org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Background.PADDING;
+
 public class Game {
     private Background background;
     private Dude dude;
@@ -23,7 +25,7 @@ public class Game {
 
     public Game() {
         background = new Background();
-        dude = new Dude(new Position(background.getWidth()/2, background.getHeight()/2 ));
+        dude = new Dude(new Position(Background.getWidth()/2, Background.getHeight()/2 ));
         myKeyboardHandler = new MyKeyboardHandler(dude);
 
 
@@ -53,23 +55,23 @@ public class Game {
 
             //if (!enemy.isCrashed()) {
                 int chance = (int) Math.ceil(Math.random() * 1000);
-                if (enemy.getPosition().getxAxis() == background.getWidth() - 1) {
+                if (enemy.getPosition().getxAxis() == Background.getWidth() - enemy.getSprite().getWidth() +PADDING - 1) {
                     enemy.getPosition().setxAxis(enemy.getPosition().getxAxis() - 1);
                     enemy.setDirection(Direction.LEFT);
-                } else if (enemy.getPosition().getxAxis() == 0) {
+                } else if (enemy.getPosition().getxAxis() == PADDING) {
                     enemy.getPosition().setxAxis(enemy.getPosition().getxAxis() + 1);
                     enemy.setDirection(Direction.RIGHT);
-                } else if (enemy.getPosition().getyAxis() == background.getHeight() - 1) {
+                } else if (enemy.getPosition().getyAxis() == Background.getHeight() - enemy.getSprite().getHeight() +PADDING - 1) {
                     enemy.getPosition().setyAxis(enemy.getPosition().getyAxis() - 1);
                     enemy.setDirection(Direction.UP);
-                } else if (enemy.getPosition().getyAxis() == 0) {
+                } else if (enemy.getPosition().getyAxis() == PADDING) {
                     enemy.getPosition().setyAxis(enemy.getPosition().getyAxis() + 1);
                     enemy.setDirection(Direction.DOWN);
                 } else {
-                    if (chance <= 990 && chance > 980) {
+                    if (chance <= 995 && chance > 990) {
                         Direction direction = enemy.left();
                         enemy.setDirection(direction);
-                    } else if (chance <= 980) {
+                    } else if (chance <= 990) {
                         enemy.forward();
                     } else {
                         Direction direction = enemy.right();

@@ -1,17 +1,14 @@
 package org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Enemy;
 
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Direction;
-import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Dude;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
 
 public class StandardEnemy extends Enemy{
-    private Direction direction;
-    private Position position;
 
-    public StandardEnemy(Position position) {
-        super(position);
-        this.position=position;
-        direction=direction();
+
+    public StandardEnemy(Position position, Direction direction) {
+        super(position,direction);
+        //setDirection(direction());
     }
 
     @Override

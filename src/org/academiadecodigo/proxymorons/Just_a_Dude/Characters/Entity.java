@@ -8,10 +8,14 @@ public abstract class Entity {
     private Rectangle sprite; //picture later
     private int speed;
 
+    public Entity(Position position,Direction direction,Rectangle sprite){
+        this.position=position;
+        this.direction=direction;
+        this.sprite=sprite;
+    }
+
     public abstract void move(Direction direction);
     public abstract void hit();
-
-
 
     public void draw() {
         sprite.draw();
@@ -36,6 +40,18 @@ public abstract class Entity {
 
         }
         return false;
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public Rectangle getSprite() {
+        return sprite;
     }
 
     public void setPosition(Position position) {

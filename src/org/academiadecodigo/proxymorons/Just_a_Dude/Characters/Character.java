@@ -8,6 +8,9 @@ public abstract class Character extends Entity{
     private int health;
     private boolean dead;
 
+    public Character(Position position, Direction direction, Rectangle sprite) {
+        super(position, direction, sprite);
+    }
 
 
     public boolean isDead() {

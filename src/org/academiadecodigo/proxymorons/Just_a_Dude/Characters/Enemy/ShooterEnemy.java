@@ -6,8 +6,8 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Shooter;
 
 public class ShooterEnemy extends Enemy implements Shooter {
-    public ShooterEnemy(Position position) {
-        super(position);
+    public ShooterEnemy(Position position, Direction direction) {
+        super(position,direction);
     }
 
     @Override
