@@ -5,18 +5,18 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Bullet;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Game;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Dude extends Character implements Shooter {
     private int health = 100;
     public final static int SPEED = 5;
 
     public Dude(Position position) {
-        super(position, Direction.UP, new Rectangle(position.getxAxis(), position.getyAxis(), 20, 40));
+        super(position, Direction.UP, new Picture(position.getxAxis(), position.getyAxis(), "Assets/Dude/DudeStanding/Front (26x50).png"));
     }
 
     public void draw() {
-        getSprite().setColor(Color.BLUE);
-        getSprite().fill();
+        getSprite().draw();
     }
 
 
@@ -46,7 +46,9 @@ public class Dude extends Character implements Shooter {
     }
 
     public void shoot() {
-        Rectangle bulletSprite = new Rectangle(getSprite().getX(), getSprite().getY(), 10, 10);
+        int x = ((getSprite().getX() + (getSprite().getX() + getSprite().getWidth()))/2);
+        int y = ((getSprite().getY() + (getSprite().getY() + getSprite().getHeight()))/2);
+        Picture bulletSprite = new Picture(x, y, "Assets/Bullet/BulletDown (3x4).png");
         bulletSprite.draw();
         Position tempPos = new Position(getPosition().getxAxis(), getPosition().getyAxis());
         Bullet bullet = new Bullet(bulletSprite, getDirection(), tempPos);

@@ -5,20 +5,20 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Direction;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public abstract class Enemy extends Character {
 
     private int speed=1;
 
     public Enemy(Position position, Direction direction){
-        super(position,direction,new Rectangle(position.getxAxis(), position.getyAxis(), 20, 40));
+        super(position,direction,new Picture(position.getxAxis(), position.getyAxis(), "Assets/Dude/DudeShooting/BackShooting/BackShooting1 (13x25).png"));
         draw();
     }
 
     @Override
     public void draw() {
-        getSprite().setColor(Color.RED);
-        getSprite().fill();
+        getSprite().draw();
     }
 
     public Direction direction() {

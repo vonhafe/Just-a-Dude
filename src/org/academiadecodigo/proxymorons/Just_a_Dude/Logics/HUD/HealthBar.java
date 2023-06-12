@@ -20,7 +20,6 @@ public class HealthBar {
     }
 
     public void update(){
-        System.out.println(health);
         health = ((dude.getHealth() * 296)/100);
         healthBar.delete();
         healthBar = new Rectangle(22, 22, health, 16);
