@@ -11,6 +11,7 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Enemy.EnemyFactor
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.MyKeyboardHandler;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.MyMouseHandler;
+import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.HUD.HUD;
 
 import java.util.LinkedList;
 
@@ -19,6 +20,7 @@ import static org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Background.PAD
 public class Game {
     private Background background;
     private Dude dude;
+    private HUD hud;
     private LinkedList<Enemy> enemies= new LinkedList<>();
     public static LinkedList<Bullet> bullets = new LinkedList<>();
     private MyKeyboardHandler myKeyboardHandler;
@@ -30,6 +32,7 @@ public class Game {
         dude = new Dude(new Position(Background.getWidth()/2, Background.getHeight()/2 ));
         myKeyboardHandler = new MyKeyboardHandler(dude);
         myMouseHandler = new MyMouseHandler(dude);
+        hud = new HUD(this);
 
 
     }
@@ -102,5 +105,9 @@ public class Game {
 
     public Dude getDude() {
         return dude;
+    }
+
+    public HUD getHUD() {
+        return hud;
     }
 }

@@ -40,8 +40,11 @@ public class AnimationLoop {
             }
 
             for(Enemy enemy: game.getEnemies()){
-                if(enemy.isTouching(game.getDude())){
-                    game.getDude().hit();
+                if (!enemy.isDead()) {
+                    if (enemy.isTouching(game.getDude())) {
+                        game.getDude().hit();
+                        game.getHUD().getHealthBar().update();
+                    }
                 }
             }
 

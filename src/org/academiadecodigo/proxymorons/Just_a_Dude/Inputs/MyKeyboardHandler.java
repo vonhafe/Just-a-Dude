@@ -48,20 +48,22 @@ public class MyKeyboardHandler implements KeyboardHandler {
     }
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
-        if (keyboardEvent.getKey()==KeyboardEvent.KEY_A){
-            dude.move(Direction.LEFT);
-        }
-        if (keyboardEvent.getKey()==KeyboardEvent.KEY_D){
-            dude.move(Direction.RIGHT);
-        }
-        if (keyboardEvent.getKey()==KeyboardEvent.KEY_W){
-            dude.move(Direction.UP);
-        }
-        if (keyboardEvent.getKey()==KeyboardEvent.KEY_S ){
-            dude.move(Direction.DOWN);
-        }
-        if (keyboardEvent.getKey()==KeyboardEvent.KEY_SPACE ){
-            dude.shoot();
+        if (!dude.isDead()) {
+            if (keyboardEvent.getKey() == KeyboardEvent.KEY_A) {
+                dude.move(Direction.LEFT);
+            }
+            if (keyboardEvent.getKey() == KeyboardEvent.KEY_D) {
+                dude.move(Direction.RIGHT);
+            }
+            if (keyboardEvent.getKey() == KeyboardEvent.KEY_W) {
+                dude.move(Direction.UP);
+            }
+            if (keyboardEvent.getKey() == KeyboardEvent.KEY_S) {
+                dude.move(Direction.DOWN);
+            }
+            if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
+                dude.shoot();
+            }
         }
     }
 
