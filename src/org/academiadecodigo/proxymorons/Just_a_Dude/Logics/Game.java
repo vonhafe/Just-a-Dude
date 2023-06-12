@@ -60,10 +60,10 @@ public class Game {
         for (Enemy enemy : enemies) {
 
             if (!enemy.isDead()) {
-                if (enemy.getPosition().getyAxis() < dude.getPosition().getyAxis()+40 &&
-                        enemy.getPosition().getyAxis() > dude.getPosition().getyAxis()-40 ||
-                        enemy.getPosition().getxAxis() < dude.getPosition().getxAxis()+40 &&
-                        enemy.getPosition().getxAxis() > dude.getPosition().getxAxis()-40) {
+                if (enemy.getPosition().getyAxis() < dude.getPosition().getyAxis()+150 &&
+                        enemy.getPosition().getyAxis() > dude.getPosition().getyAxis()-150 &&
+                        enemy.getPosition().getxAxis() < dude.getPosition().getxAxis()+150 &&
+                        enemy.getPosition().getxAxis() > dude.getPosition().getxAxis()-150) {
                     seekMovement(enemy);
 
                 } else if (enemy.getPosition().getyAxis() < PADDING ||
