@@ -35,27 +35,36 @@ public class MyKeyboardHandler implements KeyboardHandler {
         k4.setKey(KeyboardEvent.KEY_S);
         k4.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
+        KeyboardEvent k5= new KeyboardEvent();
+        k5.setKey(KeyboardEvent.KEY_SPACE);
+        k5.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
 
         keyboard.addEventListener(k1);
         keyboard.addEventListener(k2);
         keyboard.addEventListener(k3);
         keyboard.addEventListener(k4);
+        keyboard.addEventListener(k5);
     }
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
-        if (keyboardEvent.getKey()==KeyboardEvent.KEY_A){
-            dude.move(Direction.LEFT);
+        if (!dude.isDead()) {
+            if (keyboardEvent.getKey() == KeyboardEvent.KEY_A) {
+                dude.move(Direction.LEFT);
+            }
+            if (keyboardEvent.getKey() == KeyboardEvent.KEY_D) {
+                dude.move(Direction.RIGHT);
+            }
+            if (keyboardEvent.getKey() == KeyboardEvent.KEY_W) {
+                dude.move(Direction.UP);
+            }
+            if (keyboardEvent.getKey() == KeyboardEvent.KEY_S) {
+                dude.move(Direction.DOWN);
+            }
+            if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
+                dude.shoot();
+            }
         }
-        if (keyboardEvent.getKey()==KeyboardEvent.KEY_D){
-            dude.move(Direction.RIGHT);
-        }
-        if (keyboardEvent.getKey()==KeyboardEvent.KEY_W){
-            dude.move(Direction.UP);
-        }
-        if (keyboardEvent.getKey()==KeyboardEvent.KEY_S){
-            dude.move(Direction.DOWN);
-        }
-
     }
 
     @Override
