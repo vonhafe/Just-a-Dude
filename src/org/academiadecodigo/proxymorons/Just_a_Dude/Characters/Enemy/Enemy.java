@@ -2,6 +2,7 @@ package org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Enemy;
 
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Character;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Direction;
+import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Entity;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
@@ -88,6 +89,25 @@ public abstract class Enemy extends Character {
             getSprite().translate(-speed,0);
             return Direction.LEFT;
         }
+    }
+
+
+    public Direction enemiesTouching(Entity entity) {
+            Position[] enemyTouchingBox = entity.getHitBox();
+
+                for (int i = 0; i < enemyTouchingBox.length; i++) {
+
+
+                if (enemyTouchingBox[i].getxAxis() >= this.getPosition().getxAxis()
+                        && enemyTouchingBox[i].getxAxis() <= this.getPosition().getxAxis() + this.getSprite().getWidth()
+                        && enemyTouchingBox[i].getyAxis() >= this.getPosition().getyAxis()
+                        && enemyTouchingBox[i].getyAxis() <= this.getPosition().getyAxis() + this.getSprite().getHeight()) {
+                    if (i==0){
+
+                    }
+                }
+            }
+            return null;
     }
 
     public void dies(){
