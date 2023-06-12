@@ -60,60 +60,73 @@ public class Game {
         for (Enemy enemy : enemies) {
 
             if (!enemy.isDead()) {
+                if (enemy.getPosition().getyAxis() < dude.getPosition().getyAxis()+40 &&
+                        enemy.getPosition().getyAxis() > dude.getPosition().getyAxis()-40 ||
+                        enemy.getPosition().getxAxis() < dude.getPosition().getxAxis()+40 &&
+                        enemy.getPosition().getxAxis() > dude.getPosition().getxAxis()-40) {
+                    seekMovement(enemy);
 
-                if (enemy.getPosition().getyAxis() < PADDING ||
+                } else if (enemy.getPosition().getyAxis() < PADDING ||
                         enemy.getPosition().getyAxis() > PADDING + Background.getHeight() - enemy.getSprite().getHeight() ||
                         enemy.getPosition().getxAxis() < PADDING ||
                         enemy.getPosition().getxAxis() > PADDING + Background.getWidth() - enemy.getSprite().getWidth()) {
+                    seekMovement(enemy);
 
-                    if (dude.getPosition().getyAxis() < enemy.getPosition().getyAxis()) {
-                        enemy.getPosition().setyAxis(enemy.getPosition().getyAxis() - 1);
-                        enemy.getSprite().translate(0, -1);
-                    } else if (dude.getPosition().getyAxis() > enemy.getPosition().getyAxis()) {
-                        enemy.getPosition().setyAxis(enemy.getPosition().getyAxis() + 1);
-                        enemy.getSprite().translate(0, 1);
-
-                    }
-                    if (dude.getPosition().getxAxis() < enemy.getPosition().getxAxis()) {
-                        enemy.getPosition().setxAxis(enemy.getPosition().getxAxis() - 1);
-                        enemy.getSprite().translate(-1, 0);
-                    } else if (dude.getPosition().getxAxis() > enemy.getPosition().getxAxis()) {
-                        enemy.getPosition().setxAxis(enemy.getPosition().getxAxis() + 1);
-                        enemy.getSprite().translate(1, 0);
-
-                    }
                 } else {
-
-                    int chance = (int) Math.ceil(Math.random() * 1000);
-                    if (enemy.getPosition().getxAxis() == Background.getWidth() - enemy.getSprite().getWidth() + PADDING - 1) {
-                        enemy.getPosition().setxAxis(enemy.getPosition().getxAxis() - 1);
-                        enemy.setDirection(Direction.LEFT);
-                    } else if (enemy.getPosition().getxAxis() == PADDING) {
-                        enemy.getPosition().setxAxis(enemy.getPosition().getxAxis() + 1);
-                        enemy.setDirection(Direction.RIGHT);
-                    } else if (enemy.getPosition().getyAxis() == Background.getHeight() - enemy.getSprite().getHeight() + PADDING - 1) {
-                        enemy.getPosition().setyAxis(enemy.getPosition().getyAxis() - 1);
-                        enemy.setDirection(Direction.UP);
-                    } else if (enemy.getPosition().getyAxis() == PADDING) {
-                        enemy.getPosition().setyAxis(enemy.getPosition().getyAxis() + 1);
-                        enemy.setDirection(Direction.DOWN);
-                    } else {
-                        if (chance <= 995 && chance > 990) {
-                            Direction direction = enemy.left();
-                            enemy.setDirection(direction);
-                        } else if (chance <= 990) {
-                            enemy.forward();
-                        } else {
-                            Direction direction = enemy.right();
-                            enemy.setDirection(direction);
-                        }
-                    }
+                    randomMovements(enemy);
                 }
             }
 
 
         }
 
+    }
+
+    public void seekMovement(Enemy enemy){
+        if (dude.getPosition().getyAxis() < enemy.getPosition().getyAxis()) {
+            enemy.getPosition().setyAxis(enemy.getPosition().getyAxis() - 1);
+            enemy.getSprite().translate(0, -1);
+        } else if (dude.getPosition().getyAxis() > enemy.getPosition().getyAxis()) {
+            enemy.getPosition().setyAxis(enemy.getPosition().getyAxis() + 1);
+            enemy.getSprite().translate(0, 1);
+
+        }
+        if (dude.getPosition().getxAxis() < enemy.getPosition().getxAxis()) {
+            enemy.getPosition().setxAxis(enemy.getPosition().getxAxis() - 1);
+            enemy.getSprite().translate(-1, 0);
+        } else if (dude.getPosition().getxAxis() > enemy.getPosition().getxAxis()) {
+            enemy.getPosition().setxAxis(enemy.getPosition().getxAxis() + 1);
+            enemy.getSprite().translate(1, 0);
+
+        }
+    }
+
+    public void randomMovements(Enemy enemy){
+
+        int chance = (int) Math.ceil(Math.random() * 1000);
+        if (enemy.getPosition().getxAxis() == Background.getWidth() - enemy.getSprite().getWidth() + PADDING - 1) {
+            enemy.getPosition().setxAxis(enemy.getPosition().getxAxis() - 1);
+            enemy.setDirection(Direction.LEFT);
+        } else if (enemy.getPosition().getxAxis() == PADDING) {
+            enemy.getPosition().setxAxis(enemy.getPosition().getxAxis() + 1);
+            enemy.setDirection(Direction.RIGHT);
+        } else if (enemy.getPosition().getyAxis() == Background.getHeight() - enemy.getSprite().getHeight() + PADDING - 1) {
+            enemy.getPosition().setyAxis(enemy.getPosition().getyAxis() - 1);
+            enemy.setDirection(Direction.UP);
+        } else if (enemy.getPosition().getyAxis() == PADDING) {
+            enemy.getPosition().setyAxis(enemy.getPosition().getyAxis() + 1);
+            enemy.setDirection(Direction.DOWN);
+        } else {
+            if (chance <= 995 && chance > 990) {
+                Direction direction = enemy.left();
+                enemy.setDirection(direction);
+            } else if (chance <= 990) {
+                enemy.forward();
+            } else {
+                Direction direction = enemy.right();
+                enemy.setDirection(direction);
+            }
+        }
     }
 
 
