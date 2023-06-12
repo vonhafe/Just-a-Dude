@@ -92,25 +92,21 @@ public class Dude extends Character implements Shooter {
 
 
 
-    public void hit() {
-        this.health--;
-        if (health <= 0){
-            health = 0;
-            setDead(true);
-        }
-    }
 
     public Position[] getHitBox() {
         return super.getHitBox();
     }
 
-<<<<<<< HEAD
-    public void hit(){health--;}
-=======
+
+    public void hit(){
+
+    }
+
+
     public int getHealth() {
         return health;
     }
->>>>>>> 6257c0920577e47376817d8275c2c2def94ed894
+
 
     public void setHealth(int health) {
         this.health = health;
