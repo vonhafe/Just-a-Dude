@@ -1,6 +1,7 @@
 package org.academiadecodigo.proxymorons.Just_a_Dude.Logics;
 
 import org.academiadecodigo.proxymorons.Just_a_Dude.Bullet;
+import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Enemy.Enemy;
 
 public class AnimationLoop {
 
@@ -45,6 +46,20 @@ public class AnimationLoop {
                     Game.bullets.remove(bullet);
                     i--;
                 }
+            }
+
+            for (int i = 0; i < game.getEnemies().size(); i++) {
+                Enemy enemy = game.getEnemies().get(i);
+                if (enemy.isDead()) {
+                    game.getEnemies().remove(enemy);
+                    i--;
+                }
+            }
+
+            //new round
+            if(game.getEnemies().size() == 0){
+                game.setEnemiesPerRound(game.getEnemiesPerRound() + 5);
+                game.createEnemies(game.getEnemiesPerRound());
             }
 
         }

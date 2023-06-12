@@ -23,7 +23,7 @@ public class Game {
     public static LinkedList<Bullet> bullets = new LinkedList<>();
     private MyKeyboardHandler myKeyboardHandler;
     private MyMouseHandler myMouseHandler;
-
+    private int enemiesPerRound = 10;
 
     public Game() {
         background = new Background();
@@ -39,7 +39,7 @@ public class Game {
         dude.draw();
         myKeyboardHandler.init();
         myMouseHandler.init();
-        createEnemies(10);
+        createEnemies(enemiesPerRound);
         AnimationLoop loop = new AnimationLoop();
         loop.setGame(this);
         loop.start();
@@ -90,5 +90,13 @@ public class Game {
 
     public LinkedList<Enemy> getEnemies() {
         return enemies;
+    }
+
+    public int getEnemiesPerRound() {
+        return enemiesPerRound;
+    }
+
+    public void setEnemiesPerRound(int enemiesPerRound) {
+        this.enemiesPerRound = enemiesPerRound;
     }
 }
