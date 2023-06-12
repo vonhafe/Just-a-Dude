@@ -84,7 +84,7 @@ public class Dude extends Character implements Shooter {
     public void shoot() {
         int x = ((getSprite().getX() + (getSprite().getX() + getSprite().getWidth()))/2);
         int y = ((getSprite().getY() + (getSprite().getY() + getSprite().getHeight()))/2);
-        Picture bulletSprite = new Picture(x, y, "Assets/Bullet/BulletDown (3x4).png");
+        Picture bulletSprite = new Picture(x, y, "Assets/Bullet/BulletDown (6x8).png");
         bulletSprite.draw();
         Position tempPos = new Position(getPosition().getxAxis(), getPosition().getyAxis());
         Bullet bullet = new Bullet(bulletSprite, getDirection(), tempPos);
@@ -101,7 +101,11 @@ public class Dude extends Character implements Shooter {
 
 
     public void hit(){
-
+        this.health--;
+        if (health <= 0){
+            health = 0;
+            setDead(true);
+        }
     }
 
 
