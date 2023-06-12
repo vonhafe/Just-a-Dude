@@ -4,6 +4,7 @@ package org.academiadecodigo.proxymorons.Just_a_Dude.Characters;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Bullet;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Background;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Game;
+import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Music;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
@@ -158,6 +159,10 @@ public class Dude extends Character implements Shooter {
         Bullet bullet = new Bullet(bulletSprite, getDirection(), tempPos);
         Game.bullets.add(bullet);
         setShooting(false);
+        //sound effect
+        String filepath = "Assets/Sound/shoot.wav";
+        Music music = new Music();
+        music.clipSound(filepath);
     }
 
 

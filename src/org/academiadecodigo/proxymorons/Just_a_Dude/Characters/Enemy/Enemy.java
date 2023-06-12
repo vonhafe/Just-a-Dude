@@ -4,6 +4,7 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Character;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Direction;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Entity;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
+import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Music;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
@@ -112,6 +113,10 @@ public abstract class Enemy extends Character {
 
     public void dies(){
         setDead(true);
+        //sound effect
+        String filepath = "Assets/Sound/die.wav";
+        Music music = new Music();
+        music.clipSound(filepath);
         getSprite().delete();
     }
 

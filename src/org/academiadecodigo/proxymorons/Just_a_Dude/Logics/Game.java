@@ -43,6 +43,10 @@ public class Game {
         myKeyboardHandler.init();
         myMouseHandler.init();
         createEnemies(enemiesPerRound);
+        //sound effect
+        String filepath = "Assets/Sound/background.wav";
+        Music music = new Music();
+        music.backgroundMusic(filepath);
         AnimationLoop loop = new AnimationLoop();
         loop.setGame(this);
         loop.start();
