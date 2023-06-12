@@ -29,7 +29,7 @@ public class Game {
 
     public Game() {
         background = new Background();
-        dude = new Dude(new Position(Background.getWidth()/2, Background.getHeight()/2 ));
+        dude = new Dude(new Position(Background.getWidth() / 2, Background.getHeight() / 2));
         myKeyboardHandler = new MyKeyboardHandler(dude);
         myMouseHandler = new MyMouseHandler(dude);
         hud = new HUD(this);
@@ -49,7 +49,7 @@ public class Game {
 
     }
 
-    public LinkedList<Enemy> createEnemies(int  numberEnemies){
+    public LinkedList<Enemy> createEnemies(int numberEnemies) {
         for (int i = 0; i < numberEnemies; i++) {
             enemies.add(EnemyFactory.getNewEnemy());
             //System.out.println(enemies.size());
@@ -60,7 +60,25 @@ public class Game {
     public void moveAllEnemies(LinkedList<Enemy> enemies) {
         for (Enemy enemy : enemies) {
 
+
             if (!enemy.isDead()) {
+                if (dude.getPosition().getyAxis() < enemy.getPosition().getyAxis()) {
+                    enemy.getPosition().setyAxis(enemy.getPosition().getyAxis() - 1);
+                    enemy.getSprite().translate(0, -1);
+                } else if (dude.getPosition().getyAxis() > enemy.getPosition().getyAxis()) {
+                    enemy.getPosition().setyAxis(enemy.getPosition().getyAxis() + 1);
+                    enemy.getSprite().translate(0, 1);
+
+                }
+                if (dude.getPosition().getxAxis() < enemy.getPosition().getxAxis()) {
+                    enemy.getPosition().setxAxis(enemy.getPosition().getxAxis() - 1);
+                    enemy.getSprite().translate(-1, 0);
+                } else if (dude.getPosition().getxAxis() > enemy.getPosition().getxAxis()) {
+                    enemy.getPosition().setxAxis(enemy.getPosition().getxAxis() + 1);
+                    enemy.getSprite().translate(1, 0);
+
+                }
+                /*
                 int chance = (int) Math.ceil(Math.random() * 1000);
                 if (enemy.getPosition().getxAxis() == Background.getWidth() - enemy.getSprite().getWidth() + PADDING - 1) {
                     enemy.getPosition().setxAxis(enemy.getPosition().getxAxis() - 1);
@@ -84,8 +102,9 @@ public class Game {
                         Direction direction = enemy.right();
                         enemy.setDirection(direction);
                     }
-                }
+                }*/
             }
+
 
         }
 
