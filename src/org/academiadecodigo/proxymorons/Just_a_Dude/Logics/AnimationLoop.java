@@ -29,7 +29,7 @@ public class AnimationLoop {
 
             //see synchronization, still has concurrent modification error
             for (Bullet bullet : Game.bullets) {
-                if (bullet.isOutOfBounds() || bullet.hitEnemy()) {
+                if (bullet.isOutOfBounds() || bullet.hitEnemy(game)) {
                     bullet.hit();
                 }
                 if (bullet.isShooting()) {

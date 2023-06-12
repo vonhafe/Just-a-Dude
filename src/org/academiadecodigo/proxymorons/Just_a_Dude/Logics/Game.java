@@ -57,15 +57,15 @@ public class Game {
     public void moveAllEnemies(LinkedList<Enemy> enemies) {
         for (Enemy enemy : enemies) {
 
-            //if (!enemy.isCrashed()) {
+            if (!enemy.isDead()) {
                 int chance = (int) Math.ceil(Math.random() * 1000);
-                if (enemy.getPosition().getxAxis() == Background.getWidth() - enemy.getSprite().getWidth() +PADDING - 1) {
+                if (enemy.getPosition().getxAxis() == Background.getWidth() - enemy.getSprite().getWidth() + PADDING - 1) {
                     enemy.getPosition().setxAxis(enemy.getPosition().getxAxis() - 1);
                     enemy.setDirection(Direction.LEFT);
                 } else if (enemy.getPosition().getxAxis() == PADDING) {
                     enemy.getPosition().setxAxis(enemy.getPosition().getxAxis() + 1);
                     enemy.setDirection(Direction.RIGHT);
-                } else if (enemy.getPosition().getyAxis() == Background.getHeight() - enemy.getSprite().getHeight() +PADDING - 1) {
+                } else if (enemy.getPosition().getyAxis() == Background.getHeight() - enemy.getSprite().getHeight() + PADDING - 1) {
                     enemy.getPosition().setyAxis(enemy.getPosition().getyAxis() - 1);
                     enemy.setDirection(Direction.UP);
                 } else if (enemy.getPosition().getyAxis() == PADDING) {
@@ -82,7 +82,7 @@ public class Game {
                         enemy.setDirection(direction);
                     }
                 }
-            //}
+            }
 
         }
 

@@ -1,6 +1,7 @@
 package org.academiadecodigo.proxymorons.Just_a_Dude;
 
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Direction;
+import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Enemy.Enemy;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Entity;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Background;
@@ -68,7 +69,21 @@ public class Bullet extends Entity {
     return false;
     }
 
-    public boolean  hitEnemy(){
+    public boolean  hitEnemy(Game game){
+        for (Enemy enemy : game.getEnemies()){
+            if(!enemy.isDead()) {
+                Position[] bulletHitBox = getHitBox();
+                for (Position point : bulletHitBox) {
+                    if (point.getxAxis() >= enemy.getPosition().getxAxis()
+                            && point.getxAxis() <= enemy.getPosition().getxAxis() + enemy.getSprite().getWidth()
+                            && point.getyAxis() >= enemy.getPosition().getyAxis()
+                            && point.getyAxis() <= enemy.getPosition().getyAxis() + enemy.getSprite().getHeight()) {
+                        enemy.dies();
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 
