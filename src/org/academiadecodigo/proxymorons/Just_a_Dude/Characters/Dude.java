@@ -6,6 +6,7 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Background;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Game;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import static org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Background.PADDING;
 import static org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Background.getWidth;
@@ -15,12 +16,11 @@ public class Dude extends Character implements Shooter {
     public final static int SPEED = 5;
 
     public Dude(Position position) {
-        super(position, Direction.UP, new Rectangle(position.getxAxis(), position.getyAxis(), 20, 40));
+        super(position, Direction.UP, new Picture(position.getxAxis(), position.getyAxis(), "Assets/Dude/DudeStanding/Front (26x50).png"));
     }
 
     public void draw() {
-        getSprite().setColor(Color.BLUE);
-        getSprite().fill();
+        getSprite().draw();
     }
 
 
@@ -82,7 +82,9 @@ public class Dude extends Character implements Shooter {
     }
 
     public void shoot() {
-        Rectangle bulletSprite = new Rectangle(getSprite().getX(), getSprite().getY(), 10, 10);
+        int x = ((getSprite().getX() + (getSprite().getX() + getSprite().getWidth()))/2);
+        int y = ((getSprite().getY() + (getSprite().getY() + getSprite().getHeight()))/2);
+        Picture bulletSprite = new Picture(x, y, "Assets/Bullet/BulletDown (6x8).png");
         bulletSprite.draw();
         Position tempPos = new Position(getPosition().getxAxis(), getPosition().getyAxis());
         Bullet bullet = new Bullet(bulletSprite, getDirection(), tempPos);
@@ -92,7 +94,13 @@ public class Dude extends Character implements Shooter {
 
 
 
-    public void hit() {
+
+    public Position[] getHitBox() {
+        return super.getHitBox();
+    }
+
+
+    public void hit(){
         this.health--;
         if (health <= 0){
             health = 0;
@@ -100,13 +108,11 @@ public class Dude extends Character implements Shooter {
         }
     }
 
-    public Position[] getHitBox() {
-        return super.getHitBox();
-    }
 
     public int getHealth() {
         return health;
     }
+
 
     public void setHealth(int health) {
         this.health = health;

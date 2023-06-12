@@ -1,14 +1,15 @@
 package org.academiadecodigo.proxymorons.Just_a_Dude.Characters;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public abstract class Entity {
     private Position position;
     private Direction direction;
-    private Rectangle sprite; //picture later
+    private Picture sprite; //picture later
     private int speed;
 
-    public Entity(Position position,Direction direction,Rectangle sprite){
+    public Entity(Position position, Direction direction, Picture sprite){
         this.position=position;
         this.direction=direction;
         this.sprite=sprite;
@@ -54,7 +55,7 @@ public abstract class Entity {
         return position;
     }
 
-    public Rectangle getSprite() {
+    public Picture getSprite() {
         return sprite;
     }
 
@@ -66,7 +67,7 @@ public abstract class Entity {
         this.direction = direction;
     }
 
-    public void setSprite(Rectangle sprite) {
+    public void setSprite(Picture sprite) {
         this.sprite = sprite;
     }
 }

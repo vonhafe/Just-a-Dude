@@ -7,21 +7,18 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Background;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Game;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Bullet extends Entity {
     private boolean shooting;
     public static int SPEED = 10;
     public Position target;
 
-    public Bullet(Rectangle bulletSprite, Direction direction, Position position) {
+    public Bullet(Picture bulletSprite, Direction direction, Position position) {
         super(position,direction,bulletSprite);
         this.shooting = true;
     }
-    public Bullet(Rectangle bulletSprite, Position target, Position positionDude) {
-        super(positionDude,Direction.UP,bulletSprite);
-        this.target=target;
-        this.shooting = true;
-    }
+
 
    public void move(Direction direction) {
         switch (direction) {
@@ -79,6 +76,7 @@ public class Bullet extends Entity {
                             && point.getyAxis() >= enemy.getPosition().getyAxis()
                             && point.getyAxis() <= enemy.getPosition().getyAxis() + enemy.getSprite().getHeight()) {
                         enemy.dies();
+                        game.getHUD().getScore().updateScore();
                         return true;
                     }
                 }
