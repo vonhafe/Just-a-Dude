@@ -20,13 +20,41 @@ public class Dude extends Character implements Shooter {
     }
 
     public void draw() {
-        getSprite().draw();
+        if (getSprite() != null){
+            getSprite().delete();
+        }
+        if (isDead()){
+            getSprite().draw();
+            return;
+        }
+
+        switch (getDirection()){
+            case UP:
+                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back2 (26x50).png"));
+                getSprite().draw();
+                break;
+            case DOWN:
+                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Front/Front2 (26 x 50).png"));
+                getSprite().draw();
+                break;
+            case LEFT:
+                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Left/Left1 (24x48).png"));
+                getSprite().draw();
+                break;
+            case RIGHT:
+                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Right/Right1 (24x48).png"));
+                getSprite().draw();
+                break;
+
+        }
+
     }
 
 
     public void move(Direction direction) {
         switch (direction) {
             case UP:
+                draw();
                 if (getPosition().getyAxis() - SPEED > PADDING) {
                     setDirection(Direction.UP);
                     getSprite().translate(0, -SPEED);
@@ -40,6 +68,7 @@ public class Dude extends Character implements Shooter {
                 }
                 break;
             case RIGHT:
+                draw();
                 if (getPosition().getxAxis() + SPEED < PADDING + Background.getWidth() - getSprite().getWidth()) {
                     setDirection(Direction.RIGHT);
                     getSprite().translate(SPEED, 0);
@@ -53,6 +82,7 @@ public class Dude extends Character implements Shooter {
                 }
                 break;
             case DOWN:
+                draw();
                 if (getPosition().getyAxis() + SPEED < PADDING + Background.getHeight() - getSprite().getHeight()) {
                     setDirection(Direction.DOWN);
                     getSprite().translate(0, SPEED);
@@ -66,6 +96,7 @@ public class Dude extends Character implements Shooter {
                 }
                 break;
             case LEFT:
+                draw();
                 if (getPosition().getxAxis() - SPEED > PADDING) {
                     setDirection(Direction.LEFT);
                     getSprite().translate(-SPEED, 0);
@@ -101,13 +132,22 @@ public class Dude extends Character implements Shooter {
 
 
     public void hit(){
-        this.health--;
-        if (health <= 0){
-            health = 0;
-            setDead(true);
+        if (!isDead()) {
+            this.health--;
+            if (health <= 0) {
+                health = 0;
+                setDead(true);
+            }
         }
     }
 
+    @Override
+    public void setDead(boolean dead) {
+        super.setDead(dead);
+        getSprite().delete();
+        setSprite(new Picture(getSprite().getX(), getSprite().getY() + 34, "Assets/Dude/DudeDeath/Death (42x16).png"));
+        draw();
+    }
 
     public int getHealth() {
         return health;
