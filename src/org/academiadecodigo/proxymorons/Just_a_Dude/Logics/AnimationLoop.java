@@ -29,6 +29,7 @@ public class AnimationLoop {
 
 
             //see synchronization, still has concurrent modification error
+            //check collision bullets
             for (Bullet bullet : Game.bullets) {
                 if (bullet.isOutOfBounds() || bullet.hitEnemy(game)) {
                     bullet.hit();
@@ -38,7 +39,7 @@ public class AnimationLoop {
                 }
 
             }
-
+            //check collision enemies
             for(Enemy enemy: game.getEnemies()){
                 if (!enemy.isDead()) {
                     if (enemy.isTouching(game.getDude())) {
@@ -69,6 +70,7 @@ public class AnimationLoop {
 
             //new round
             if(game.getEnemies().size() == 0){
+                game.getHUD().getScore().updateRound();
                 game.setEnemiesPerRound(game.getEnemiesPerRound() + 5);
                 game.createEnemies(game.getEnemiesPerRound());
             }
