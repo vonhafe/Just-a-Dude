@@ -14,6 +14,7 @@ import static org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Background.get
 public class Dude extends Character implements Shooter {
     private int health = 100;
     public final static int SPEED = 5;
+    public boolean shooting;
 
     public Dude(Position position) {
         super(position, Direction.UP, new Picture(position.getxAxis(), position.getyAxis(), "Assets/Dude/DudeStanding/Front (26x50).png"));
@@ -30,19 +31,35 @@ public class Dude extends Character implements Shooter {
 
         switch (getDirection()){
             case UP:
-                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back2 (26x50).png"));
+                if (isShooting()){
+                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeShooting/BackShooting/BackShooting1 (26x50).png"));
+                } else {
+                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back2 (26x50).png"));
+                }
                 getSprite().draw();
                 break;
             case DOWN:
-                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Front/Front2 (26 x 50).png"));
+                if (isShooting()){
+                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeShooting/FrontShooting/FrontShooting1 (26x48).png"));
+                } else {
+                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Front/Front2 (26 x 50).png"));
+                }
                 getSprite().draw();
                 break;
             case LEFT:
-                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Left/Left1 (24x48).png"));
+                if (isShooting()){
+                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeShooting/LeftShooting/LeftShooting1 (36x48).png"));
+                } else {
+                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Left/Left1 (24x48).png"));
+                }
                 getSprite().draw();
                 break;
             case RIGHT:
-                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Right/Right1 (24x48).png"));
+                if (isShooting()){
+                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeShooting/RightShooting/RightShooting1 (36x48).png"));
+                } else {
+                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Right/Right1 (24x48).png"));
+                }
                 getSprite().draw();
                 break;
 
@@ -54,9 +71,9 @@ public class Dude extends Character implements Shooter {
     public void move(Direction direction) {
         switch (direction) {
             case UP:
-                draw();
                 if (getPosition().getyAxis() - SPEED > PADDING) {
                     setDirection(Direction.UP);
+                    draw();
                     getSprite().translate(0, -SPEED);
                     getPosition().setyAxis(getPosition().getyAxis() - SPEED);
                 } else {
@@ -68,9 +85,9 @@ public class Dude extends Character implements Shooter {
                 }
                 break;
             case RIGHT:
-                draw();
                 if (getPosition().getxAxis() + SPEED < PADDING + Background.getWidth() - getSprite().getWidth()) {
                     setDirection(Direction.RIGHT);
+                    draw();
                     getSprite().translate(SPEED, 0);
                     getPosition().setxAxis(getPosition().getxAxis() + SPEED);
                 } else {
@@ -82,9 +99,9 @@ public class Dude extends Character implements Shooter {
                 }
                 break;
             case DOWN:
-                draw();
                 if (getPosition().getyAxis() + SPEED < PADDING + Background.getHeight() - getSprite().getHeight()) {
                     setDirection(Direction.DOWN);
+                    draw();
                     getSprite().translate(0, SPEED);
                     getPosition().setyAxis(getPosition().getyAxis() + SPEED);
                 } else {
@@ -96,9 +113,9 @@ public class Dude extends Character implements Shooter {
                 }
                 break;
             case LEFT:
-                draw();
                 if (getPosition().getxAxis() - SPEED > PADDING) {
                     setDirection(Direction.LEFT);
+                    draw();
                     getSprite().translate(-SPEED, 0);
                     getPosition().setxAxis(getPosition().getxAxis() - SPEED);
                 } else {
@@ -113,13 +130,34 @@ public class Dude extends Character implements Shooter {
     }
 
     public void shoot() {
+        setShooting(true);
+        draw();
         int x = ((getSprite().getX() + (getSprite().getX() + getSprite().getWidth()))/2);
         int y = ((getSprite().getY() + (getSprite().getY() + getSprite().getHeight()))/2);
-        Picture bulletSprite = new Picture(x, y, "Assets/Bullet/BulletDown (6x8).png");
+        Picture bulletSprite = new Picture();
+        switch (getDirection()) {
+            case DOWN:
+                Picture down = new Picture(x, y, "Assets/Bullet/BulletDown (6x8).png");
+                bulletSprite = down;
+                break;
+            case UP:
+                Picture up = new Picture(x, y, "Assets/Bullet/BulletFront (6x8).png");
+                bulletSprite = up;
+                break;
+            case LEFT:
+                Picture left = new Picture(x, y, "Assets/Bullet/BulletLeft (8x6).png");
+                bulletSprite = left;
+                break;
+            case RIGHT:
+                Picture right = new Picture(x, y, "Assets/Bullet/BulletRight (8x6).png");
+                bulletSprite = right;
+                break;
+        }
         bulletSprite.draw();
-        Position tempPos = new Position(getPosition().getxAxis(), getPosition().getyAxis());
+        Position tempPos = new Position(x, y);
         Bullet bullet = new Bullet(bulletSprite, getDirection(), tempPos);
         Game.bullets.add(bullet);
+        setShooting(false);
     }
 
 
@@ -156,5 +194,13 @@ public class Dude extends Character implements Shooter {
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public boolean isShooting() {
+        return shooting;
+    }
+
+    public void setShooting(boolean shooting) {
+        this.shooting = shooting;
     }
 }
