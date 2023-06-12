@@ -13,6 +13,10 @@ public abstract class Character extends Entity{
     }
 
 
+    public void setDead(boolean dead) {
+        this.dead = dead;
+    }
+
     public boolean isDead() {
         return dead;
     }

@@ -34,11 +34,15 @@ public abstract class Entity {
     }
 
     public boolean isTouching(Entity entity){
-        Position[] thisHitBox = getHitBox();
-        Position[] entityHitBox = entity.getHitBox();
-        for (Position positionThis : thisHitBox){
-
-        }
+            Position[] dudeTouchingBox = entity.getHitBox();
+            for (Position point : dudeTouchingBox) {
+                if (point.getxAxis() >= this.getPosition().getxAxis()
+                        && point.getxAxis() <= this.getPosition().getxAxis() + this.getSprite().getWidth()
+                        && point.getyAxis() >= this.getPosition().getyAxis()
+                        && point.getyAxis() <= this.getPosition().getyAxis() + this.getSprite().getHeight()) {
+                    return true;
+                }
+            }
         return false;
     }
 

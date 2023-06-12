@@ -89,21 +89,26 @@ public class Dude extends Character implements Shooter {
         Game.bullets.add(bullet);
     }
 
-   /* public void shoot(Position positionTarget) {
-        Rectangle bulletSprite = new Rectangle(getSprite().getX(), getSprite().getY(), 10, 10);
-        bulletSprite.draw();
-        Position tempPos = new Position(getPosition().getxAxis(), getPosition().getyAxis());
-        Position tempTarget = new Position(positionTarget.getxAxis(), positionTarget.getyAxis());
-        Bullet bullet = new Bullet(bulletSprite, tempTarget, tempPos);
-        Game.bullets.add(bullet);
-    }    */
+
 
 
     public void hit() {
-        health--;
+        this.health--;
+        if (health <= 0){
+            health = 0;
+            setDead(true);
+        }
     }
 
     public Position[] getHitBox() {
         return super.getHitBox();
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 }
