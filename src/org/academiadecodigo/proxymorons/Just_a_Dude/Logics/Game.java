@@ -29,6 +29,7 @@ public class Game {
 
     public Game() {
         background = new Background();
+        background.start();
         dude = new Dude(new Position(Background.getWidth() / 2, Background.getHeight() / 2));
         myKeyboardHandler = new MyKeyboardHandler(dude);
         myMouseHandler = new MyMouseHandler(dude);
@@ -38,7 +39,6 @@ public class Game {
     }
 
     public void start() {
-        background.start();
         dude.draw();
         myKeyboardHandler.init();
         myMouseHandler.init();

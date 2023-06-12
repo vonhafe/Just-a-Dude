@@ -1,10 +1,11 @@
 package org.academiadecodigo.proxymorons.Just_a_Dude.Logics;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Background {
     public final static int PADDING =10;
-    public final static Rectangle canvas = new Rectangle(PADDING, PADDING, 1280, 720);
+    public final static Picture canvas = new Picture(PADDING, PADDING, "Assets/Background/mainlevbuild.png");
 
 
     public void start() {

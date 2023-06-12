@@ -1,5 +1,6 @@
 package org.academiadecodigo.proxymorons.Just_a_Dude.Logics.HUD;
 
+import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 
 public class Score {
@@ -32,12 +33,14 @@ public class Score {
     }
 
     public void drawRound(){
+        roundText.setColor(Color.WHITE);
         roundText.grow(80, 30);
         roundText.draw();
 
     }
 
     public void drawScore(){
+        scoreText.setColor(Color.WHITE);
         scoreText.grow(115, 30);
         scoreText.draw();
     }
