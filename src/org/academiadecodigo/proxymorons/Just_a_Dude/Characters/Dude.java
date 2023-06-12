@@ -53,14 +53,7 @@ public class Dude extends Character implements Shooter {
         Game.bullets.add(bullet);
     }
 
-   /* public void shoot(Position positionTarget) {
-        Rectangle bulletSprite = new Rectangle(getSprite().getX(), getSprite().getY(), 10, 10);
-        bulletSprite.draw();
-        Position tempPos = new Position(getPosition().getxAxis(), getPosition().getyAxis());
-        Position tempTarget = new Position(positionTarget.getxAxis(), positionTarget.getyAxis());
-        Bullet bullet = new Bullet(bulletSprite, tempTarget, tempPos);
-        Game.bullets.add(bullet);
-    }    */
+
 
 
     public void hit() {

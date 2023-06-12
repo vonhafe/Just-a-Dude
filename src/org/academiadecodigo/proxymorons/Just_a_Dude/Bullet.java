@@ -78,15 +78,6 @@ public class Bullet extends Entity {
         }
     }
 
-/*
-    @Override
-    public void move(Direction direction) {
-        int xTranslate= (target.getxAxis()- getPosition().getxAxis())/100;
-        int yTranslate= (target.getyAxis()- getPosition().getyAxis())/100;
-        getSprite().translate(xTranslate,yTranslate);
-        getPosition().setyAxis(getPosition().getyAxis() + yTranslate);
-        getPosition().setxAxis(getPosition().getxAxis() - xTranslate);
-    }*/
 
     @Override
     public void hit() {
