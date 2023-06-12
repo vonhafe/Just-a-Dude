@@ -2,7 +2,6 @@ package org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Enemy;
 
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Character;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Direction;
-import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Dude;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
@@ -14,7 +13,6 @@ public abstract class Enemy extends Character {
     public Enemy(Position position, Direction direction){
         super(position,direction,new Rectangle(position.getxAxis(), position.getyAxis(), 20, 40));
         draw();
-        //setDirection(direction());
     }
 
     @Override
@@ -37,7 +35,6 @@ public abstract class Enemy extends Character {
         }
     }
     public void forward(){
-        //System.out.println(this.getDirection());
         if (getDirection().equals(Direction.UP)){
             getPosition().setyAxis(getPosition().getyAxis()-speed);
             getSprite().translate(0,-speed);

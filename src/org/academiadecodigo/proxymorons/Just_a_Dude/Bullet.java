@@ -10,13 +10,19 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 public class Bullet extends Entity {
     private boolean shooting;
     public static int SPEED = 10;
+    public Position target;
 
     public Bullet(Rectangle bulletSprite, Direction direction, Position position) {
         super(position,direction,bulletSprite);
         this.shooting = true;
     }
+    public Bullet(Rectangle bulletSprite, Position target, Position positionDude) {
+        super(positionDude,Direction.UP,bulletSprite);
+        this.target=target;
+        this.shooting = true;
+    }
 
-    public void move(Direction direction) {
+   public void move(Direction direction) {
         switch (direction) {
             case UP:
                 getSprite().translate(0, -SPEED);
@@ -36,6 +42,7 @@ public class Bullet extends Entity {
                 break;
         }
     }
+
 
     public boolean isShooting() {
         return shooting;
@@ -71,6 +78,15 @@ public class Bullet extends Entity {
         }
     }
 
+/*
+    @Override
+    public void move(Direction direction) {
+        int xTranslate= (target.getxAxis()- getPosition().getxAxis())/100;
+        int yTranslate= (target.getyAxis()- getPosition().getyAxis())/100;
+        getSprite().translate(xTranslate,yTranslate);
+        getPosition().setyAxis(getPosition().getyAxis() + yTranslate);
+        getPosition().setxAxis(getPosition().getxAxis() - xTranslate);
+    }*/
 
     @Override
     public void hit() {

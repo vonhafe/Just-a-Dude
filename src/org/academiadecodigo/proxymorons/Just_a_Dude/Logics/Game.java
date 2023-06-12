@@ -10,6 +10,7 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Enemy.Enemy;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Enemy.EnemyFactory;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.MyKeyboardHandler;
+import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.MyMouseHandler;
 
 import java.util.LinkedList;
 
@@ -21,12 +22,14 @@ public class Game {
     private LinkedList<Enemy> enemies= new LinkedList<>();
     public static LinkedList<Bullet> bullets = new LinkedList<>();
     private MyKeyboardHandler myKeyboardHandler;
+    private MyMouseHandler myMouseHandler;
 
 
     public Game() {
         background = new Background();
         dude = new Dude(new Position(Background.getWidth()/2, Background.getHeight()/2 ));
         myKeyboardHandler = new MyKeyboardHandler(dude);
+        myMouseHandler = new MyMouseHandler(dude);
 
 
     }
@@ -35,6 +38,7 @@ public class Game {
         background.start();
         dude.draw();
         myKeyboardHandler.init();
+        myMouseHandler.init();
         createEnemies(10);
         AnimationLoop loop = new AnimationLoop();
         loop.setGame(this);
