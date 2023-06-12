@@ -57,7 +57,8 @@ public class Dude extends Character implements Shooter {
 
 
     public void hit() {
-        health--;
+        this.health--;
+        System.out.println(health);
     }
 
     public Position[] getHitBox() {

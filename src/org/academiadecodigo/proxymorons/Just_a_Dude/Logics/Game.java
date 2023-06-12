@@ -99,4 +99,8 @@ public class Game {
     public void setEnemiesPerRound(int enemiesPerRound) {
         this.enemiesPerRound = enemiesPerRound;
     }
+
+    public Dude getDude() {
+        return dude;
+    }
 }

@@ -39,6 +39,14 @@ public class AnimationLoop {
 
             }
 
+            for(Enemy enemy: game.getEnemies()){
+                if(enemy.isTouching(game.getDude())){
+                    game.getDude().hit();
+                }
+            }
+
+
+
             //remove not shooting bullets
             for (int i = 0; i < Game.bullets.size(); i++) {
                 Bullet bullet = Game.bullets.get(i);
