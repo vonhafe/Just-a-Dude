@@ -14,6 +14,7 @@ import static org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Background.PAD
 public class Dude extends Character implements Shooter {
     private int health = 100;
     public final static int SPEED = 5;
+    public final static int DIAGONAL_SPEED = (int) (Math.sqrt((SPEED*SPEED)/2));
     public final static int BULLETLIMIT = 15;
     private int shots = 0;
     private boolean shooting;
@@ -65,6 +66,17 @@ public class Dude extends Character implements Shooter {
                 }
                 getSprite().draw();
                 break;
+            case UP_LEFT:
+                if (isShooting()) {
+                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeShooting/BackShooting/BackShooting1 (26x50).png"));
+                } else {
+                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back2 (26x50).png"));
+                }
+                getSprite().draw();
+                break;
+            default:
+                break;
+
 
         }
 
@@ -83,8 +95,6 @@ public class Dude extends Character implements Shooter {
                     setDirection(Direction.DOWN);
                     getSprite().translate(0, -getSprite().getY() + PADDING);
                     getPosition().setyAxis(PADDING);
-                    //System.out.println(getSprite().getY());
-                    //System.out.println(getPosition().getyAxis());
                 }
                 break;
             case RIGHT:
@@ -97,8 +107,6 @@ public class Dude extends Character implements Shooter {
                     setDirection(Direction.LEFT);
                     getSprite().translate(Background.getWidth() - (getSprite().getX() - PADDING) - getSprite().getWidth(), 0);
                     getPosition().setxAxis(PADDING + Background.getWidth() - getSprite().getWidth());
-                    //System.out.println(getSprite().getX());
-                    //System.out.println(getPosition().getxAxis());
                 }
                 break;
             case DOWN:
@@ -111,8 +119,6 @@ public class Dude extends Character implements Shooter {
                     setDirection(Direction.UP);
                     getSprite().translate(0, Background.getHeight() - (getSprite().getY() - PADDING) - getSprite().getHeight());
                     getPosition().setyAxis(PADDING + Background.getHeight() - getSprite().getHeight());
-                    //System.out.println(getSprite().getY());
-                    //System.out.println(getPosition().getyAxis());
                 }
                 break;
             case LEFT:
@@ -125,17 +131,37 @@ public class Dude extends Character implements Shooter {
                     setDirection(Direction.RIGHT);
                     getSprite().translate(-getSprite().getX() + PADDING, 0);
                     getPosition().setxAxis(PADDING);
-                    //System.out.println(getSprite().getX());
-                    //System.out.println(getPosition().getxAxis());
                 }
+                break;
+            case UP_LEFT:
+                System.out.println("here");
+                if (getPosition().getyAxis() - DIAGONAL_SPEED > PADDING && getPosition().getxAxis() - DIAGONAL_SPEED > PADDING) {
+                    setDirection(Direction.UP_LEFT);
+                    draw();
+                    getSprite().translate(-DIAGONAL_SPEED, -DIAGONAL_SPEED);
+                    getPosition().setyAxis(getPosition().getyAxis() - DIAGONAL_SPEED);
+                    getPosition().setxAxis(getPosition().getxAxis() - DIAGONAL_SPEED);
+                } else {
+                    setDirection(Direction.DOWN_RIGHT);
+                    getSprite().translate(-getSprite().getX() + PADDING, -getSprite().getY() + PADDING);
+                    getPosition().setyAxis(PADDING);
+                }
+                break;
+            case UP_RIGHT:
+                break;
+            case DOWN_LEFT:
+                break;
+            case DOWN_RIGHT:
                 break;
         }
     }
 
     public void shoot() {
         if(shots == BULLETLIMIT){
-            HUD.reloadDraw();
             return;
+        }
+        if (shots == BULLETLIMIT - 1){
+            HUD.reloadDraw();
         }
         setShooting(true);
         draw();
