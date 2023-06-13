@@ -3,6 +3,7 @@ package org.academiadecodigo.proxymorons.Just_a_Dude.Characters;
 
 import org.academiadecodigo.proxymorons.Just_a_Dude.Bullet;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Background;
+import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Endscreen;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Game;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Music;
 import org.academiadecodigo.simplegraphics.graphics.Color;
@@ -181,6 +182,8 @@ public class Dude extends Character implements Shooter {
             if (health <= 0) {
                 health = 0;
                 setDead(true);
+                Game.gameover=true;
+                Endscreen.start();
             }
         }
     }

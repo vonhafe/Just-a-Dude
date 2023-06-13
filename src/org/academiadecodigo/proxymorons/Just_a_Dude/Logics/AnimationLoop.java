@@ -3,6 +3,7 @@ package org.academiadecodigo.proxymorons.Just_a_Dude.Logics;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Bullet;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Enemy.Enemy;
 
+
 public class AnimationLoop {
 
     private Game game;
@@ -16,7 +17,7 @@ public class AnimationLoop {
     public void start() {
 
         // !gameover
-        while (true) {
+        while (!game.isGameover()) {
                             try {
                     Thread.sleep(30);
                 } catch (InterruptedException e) {
@@ -24,6 +25,7 @@ public class AnimationLoop {
                 }
 
                 if (game.isStarted()) {
+                    game.getEndscreen().hide();
                     game.getStartScreen().hide();
                     game.moveAllEnemies(game.getEnemies());
 
