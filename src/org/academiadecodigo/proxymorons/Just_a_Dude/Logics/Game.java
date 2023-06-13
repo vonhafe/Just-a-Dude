@@ -107,20 +107,16 @@ public class Game {
         if (dude.getPosition().getyAxis() < enemy.getPosition().getyAxis()) {
             enemy.getPosition().setyAxis(enemy.getPosition().getyAxis() - 1);
             enemy.getSprite().translate(0, -1);
-            enemy.setDirection(Direction.UP);
         } else if (dude.getPosition().getyAxis() > enemy.getPosition().getyAxis()) {
             enemy.getPosition().setyAxis(enemy.getPosition().getyAxis() + 1);
             enemy.getSprite().translate(0, 1);
-            enemy.setDirection(Direction.DOWN);
         }
         if (dude.getPosition().getxAxis() < enemy.getPosition().getxAxis()) {
             enemy.getPosition().setxAxis(enemy.getPosition().getxAxis() - 1);
             enemy.getSprite().translate(-1, 0);
-            enemy.setDirection(Direction.LEFT);
         } else if (dude.getPosition().getxAxis() > enemy.getPosition().getxAxis()) {
             enemy.getPosition().setxAxis(enemy.getPosition().getxAxis() + 1);
             enemy.getSprite().translate(1, 0);
-            enemy.setDirection(Direction.RIGHT);
         }
     }
 
