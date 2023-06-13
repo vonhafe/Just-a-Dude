@@ -13,6 +13,7 @@ public abstract class Enemy extends Character {
 
     private int speed=1;
 
+
     public Enemy(Position position, Direction direction, Picture picture){
         super(position,direction,picture);
         draw();

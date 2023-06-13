@@ -41,9 +41,11 @@ public class MyKeyboardHandler implements KeyboardHandler {
         k5.setKey(KeyboardEvent.KEY_SPACE);
         k5.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
+
         KeyboardEvent k6 = new KeyboardEvent();
         k6.setKey(KeyboardEvent.KEY_R);
         k6.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
 
 
         keyboard.addEventListener(k1);
