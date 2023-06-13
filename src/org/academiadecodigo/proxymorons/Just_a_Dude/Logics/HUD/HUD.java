@@ -1,5 +1,6 @@
 package org.academiadecodigo.proxymorons.Just_a_Dude.Logics.HUD;
 
+import org.academiadecodigo.proxymorons.Just_a_Dude.Bullet;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Dude;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Game;
 import org.academiadecodigo.simplegraphics.graphics.Color;
@@ -10,11 +11,13 @@ public class HUD {
     private HealthBar healthBar;
     private static Text reload;
     private Score score;
+    private BulletsLeft bulletsLeft;
 
     public HUD(Game game){
         this.dude = game.getDude();
         this.healthBar = new HealthBar(dude);
         this.score = new Score();
+        this.bulletsLeft = new BulletsLeft();
     }
 
     public HealthBar getHealthBar() {
@@ -23,6 +26,10 @@ public class HUD {
 
     public Score getScore() {
         return score;
+    }
+
+    public BulletsLeft getBulletsLeft() {
+        return bulletsLeft;
     }
 
     public static void reloadDraw() {
