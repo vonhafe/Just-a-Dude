@@ -8,6 +8,7 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Bullet;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Dude;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Enemy.Enemy;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Enemy.EnemyFactory;
+import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Enemy.ShooterEnemy;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.MyKeyboardHandler;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.MyMouseHandler;
@@ -23,6 +24,7 @@ public class Game {
     private HUD hud;
     private LinkedList<Enemy> enemies = new LinkedList<>();
     public static LinkedList<Bullet> bullets = new LinkedList<>();
+    public static LinkedList<Bullet> enemyBullets = new LinkedList<>();
     private MyKeyboardHandler myKeyboardHandler;
     private MyMouseHandler myMouseHandler;
     private int enemiesPerRound = 10;
@@ -64,11 +66,14 @@ public class Game {
         for (Enemy enemy : enemies) {
 
             if (!enemy.isDead()) {
-                if (enemy.getPosition().getyAxis() < dude.getPosition().getyAxis()+200 &&
-                        enemy.getPosition().getyAxis() > dude.getPosition().getyAxis()-200 &&
-                        enemy.getPosition().getxAxis() < dude.getPosition().getxAxis()+200 &&
-                        enemy.getPosition().getxAxis() > dude.getPosition().getxAxis()-200) {
+                if (enemy.getPosition().getyAxis() < dude.getPosition().getyAxis() + 200 &&
+                        enemy.getPosition().getyAxis() > dude.getPosition().getyAxis() - 200 &&
+                        enemy.getPosition().getxAxis() < dude.getPosition().getxAxis() + 200 &&
+                        enemy.getPosition().getxAxis() > dude.getPosition().getxAxis() - 200) {
                     seekMovement(enemy);
+                    if (enemy instanceof ShooterEnemy) {
+                        ((ShooterEnemy) enemy).shootChance();
+                    }
 
                 } else if (enemy.getPosition().getyAxis() < PADDING ||
                         enemy.getPosition().getyAxis() > PADDING + Background.getHeight() - enemy.getSprite().getHeight() ||
@@ -86,26 +91,28 @@ public class Game {
 
     }
 
-    public void seekMovement(Enemy enemy){
+    public void seekMovement(Enemy enemy) {
         if (dude.getPosition().getyAxis() < enemy.getPosition().getyAxis()) {
             enemy.getPosition().setyAxis(enemy.getPosition().getyAxis() - 1);
             enemy.getSprite().translate(0, -1);
+            enemy.setDirection(Direction.UP);
         } else if (dude.getPosition().getyAxis() > enemy.getPosition().getyAxis()) {
             enemy.getPosition().setyAxis(enemy.getPosition().getyAxis() + 1);
             enemy.getSprite().translate(0, 1);
-
+            enemy.setDirection(Direction.DOWN);
         }
         if (dude.getPosition().getxAxis() < enemy.getPosition().getxAxis()) {
             enemy.getPosition().setxAxis(enemy.getPosition().getxAxis() - 1);
             enemy.getSprite().translate(-1, 0);
+            enemy.setDirection(Direction.LEFT);
         } else if (dude.getPosition().getxAxis() > enemy.getPosition().getxAxis()) {
             enemy.getPosition().setxAxis(enemy.getPosition().getxAxis() + 1);
             enemy.getSprite().translate(1, 0);
-
+            enemy.setDirection(Direction.RIGHT);
         }
     }
 
-    public void randomMovements(Enemy enemy){
+    public void randomMovements(Enemy enemy) {
 
         int chance = (int) Math.ceil(Math.random() * 1000);
         if (enemy.getPosition().getxAxis() == Background.getWidth() - enemy.getSprite().getWidth() + PADDING - 1) {

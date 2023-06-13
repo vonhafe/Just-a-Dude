@@ -39,6 +39,15 @@ public class AnimationLoop {
                 }
 
             }
+            for (Bullet bullet : Game.enemyBullets) {
+                if (bullet.isOutOfBounds() || bullet.hitDude(game)) {
+                    bullet.hit();
+                }
+                if (bullet.isShooting()) {
+                    bullet.updateBullet();
+                }
+
+            }
             //check collision enemies
             for(Enemy enemy: game.getEnemies()){
                 if (!enemy.isDead()) {
@@ -56,6 +65,13 @@ public class AnimationLoop {
                 Bullet bullet = Game.bullets.get(i);
                 if (!bullet.isShooting()) {
                     Game.bullets.remove(bullet);
+                    i--;
+                }
+            }
+            for (int i = 0; i < Game.enemyBullets.size(); i++) {
+                Bullet bullet = Game.enemyBullets.get(i);
+                if (!bullet.isShooting()) {
+                    Game.enemyBullets.remove(bullet);
                     i--;
                 }
             }

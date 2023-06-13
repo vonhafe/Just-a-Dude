@@ -13,8 +13,8 @@ public abstract class Enemy extends Character {
 
     private int speed=1;
 
-    public Enemy(Position position, Direction direction){
-        super(position,direction,new Picture(position.getxAxis(), position.getyAxis(), "Assets/Enemy/Standing/Front1 (24 x 44).png"));
+    public Enemy(Position position, Direction direction, Picture sprite){
+        super(position,direction,sprite);
         draw();
     }
 

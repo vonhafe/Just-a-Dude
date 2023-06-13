@@ -2,12 +2,13 @@ package org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Enemy;
 
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Direction;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class StandardEnemy extends Enemy{
 
 
     public StandardEnemy(Position position, Direction direction) {
-        super(position,direction);
+        super(position,direction,new Picture(position.getxAxis(), position.getyAxis(), "Assets/Enemy/Standing/Front1 (24 x 44).png"));
         //setDirection(direction());
     }
 
