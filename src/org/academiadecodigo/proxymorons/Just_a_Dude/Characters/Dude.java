@@ -161,17 +161,43 @@ public class Dude extends Character implements Shooter {
                     getPosition().setyAxis(getPosition().getyAxis() - DIAGONAL_SPEED);
                     getPosition().setxAxis(getPosition().getxAxis() - DIAGONAL_SPEED);
                 } else {
-                    ///fixxx this!!!!!
-                    setDirection(Direction.DOWN_RIGHT);
-                    getSprite().translate(-getSprite().getX() + PADDING, -getSprite().getY() + PADDING);
-                    getPosition().setyAxis(PADDING);
+                    getSprite().translate(0,0);
                 }
                 break;
             case UP_RIGHT:
+                if (getPosition().getyAxis() - DIAGONAL_SPEED > PADDING && getPosition().getxAxis() + SPEED < PADDING + Background.getWidth() - getSprite().getWidth()) {
+                    setDirection(Direction.UP_RIGHT);
+                    draw();
+                    getSprite().translate(DIAGONAL_SPEED, -DIAGONAL_SPEED);
+                    getPosition().setyAxis(getPosition().getyAxis() - DIAGONAL_SPEED);
+                    getPosition().setxAxis(getPosition().getxAxis() + DIAGONAL_SPEED);
+                } else {
+                    getSprite().translate(0,0);
+                }
                 break;
             case DOWN_LEFT:
+                if (getPosition().getyAxis() + DIAGONAL_SPEED < PADDING + Background.getHeight() - getSprite().getHeight() && getPosition().getxAxis() - SPEED > PADDING) {
+                    setDirection(Direction.DOWN_LEFT);
+                    draw();
+                    getSprite().translate(-DIAGONAL_SPEED, DIAGONAL_SPEED);
+                    getPosition().setyAxis(getPosition().getyAxis() + DIAGONAL_SPEED);
+                    getPosition().setxAxis(getPosition().getxAxis() - DIAGONAL_SPEED);
+                } else {
+                    getSprite().translate(0,0);
+                }
                 break;
             case DOWN_RIGHT:
+                if (getPosition().getyAxis() + SPEED < PADDING + Background.getHeight() - getSprite().getHeight() && getPosition().getxAxis() + SPEED < PADDING + Background.getWidth() - getSprite().getWidth()) {
+                    setDirection(Direction.DOWN_RIGHT);
+                    draw();
+                    getSprite().translate(DIAGONAL_SPEED, DIAGONAL_SPEED);
+                    getPosition().setyAxis(getPosition().getyAxis() + DIAGONAL_SPEED);
+                    getPosition().setxAxis(getPosition().getxAxis() + DIAGONAL_SPEED);
+                } else {
+                    getSprite().translate(0,0);
+                }
+                break;
+            default:
                 break;
         }
     }

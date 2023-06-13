@@ -95,14 +95,14 @@ public class MyKeyboardHandler implements KeyboardHandler {
 
             handleMovement();
 
-            if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
+            if (pressedKeys.contains(KeyboardEvent.KEY_SPACE)) {
                 // Check if enough time has passed since the last shoot
                 if (System.currentTimeMillis() - dude.getLastShootTime() >= SHOOT_DELAY) {
                     dude.shoot();
                     dude.setLastShootTime(System.currentTimeMillis());
                 }
             }
-            if (keyboardEvent.getKey() == KeyboardEvent.KEY_R) {
+            if (pressedKeys.contains(KeyboardEvent.KEY_R)) {
                 dude.reload();
             }
         }
@@ -114,7 +114,7 @@ public class MyKeyboardHandler implements KeyboardHandler {
 
     private void handleMovement() {
         // Determine movement direction based on the combination of keys pressed
-        Direction direction = null;
+        Direction direction = Direction.NONE;
         if (pressedKeys.contains(KeyboardEvent.KEY_A) && pressedKeys.contains(KeyboardEvent.KEY_W)) {
             direction = Direction.UP_LEFT;
         } else if (pressedKeys.contains(KeyboardEvent.KEY_D) && pressedKeys.contains(KeyboardEvent.KEY_W)) {
