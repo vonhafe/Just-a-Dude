@@ -41,12 +41,18 @@ public class MyKeyboardHandler implements KeyboardHandler {
         k5.setKey(KeyboardEvent.KEY_SPACE);
         k5.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
+        KeyboardEvent k6 = new KeyboardEvent();
+        k6.setKey(KeyboardEvent.KEY_R);
+        k6.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
 
         keyboard.addEventListener(k1);
         keyboard.addEventListener(k2);
         keyboard.addEventListener(k3);
         keyboard.addEventListener(k4);
         keyboard.addEventListener(k5);
+        keyboard.addEventListener(k6);
+
     }
 
     @Override
@@ -71,9 +77,11 @@ public class MyKeyboardHandler implements KeyboardHandler {
                     dude.setLastShootTime(System.currentTimeMillis());
                 }
             }
+            if (keyboardEvent.getKey() == KeyboardEvent.KEY_R) {
+                dude.reload();
+            }
         }
     }
-
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
 
