@@ -6,7 +6,6 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Entity;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Background;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Game;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Bullet extends Entity {
@@ -37,6 +36,17 @@ public class Bullet extends Entity {
                 getSprite().translate(-SPEED, 0);
                 getPosition().setxAxis(getPosition().getxAxis() - SPEED);
                 break;
+            case UP_LEFT:
+            case UP_RIGHT:
+                getSprite().translate(0, -SPEED);
+                getPosition().setyAxis(getPosition().getyAxis() - SPEED);
+                break;
+            case DOWN_LEFT:
+            case DOWN_RIGHT:
+                getSprite().translate(0, SPEED);
+                getPosition().setyAxis(getPosition().getyAxis() + SPEED);
+                break;
+
         }
     }
 
@@ -94,7 +104,7 @@ public class Bullet extends Entity {
                             && point.getyAxis() >= game.getDude().getPosition().getyAxis()
                             && point.getyAxis() <= game.getDude().getPosition().getyAxis() + game.getDude().getSprite().getHeight()) {
                         game.getDude().hit();
-                        game.getHUD().getScore().updateScore();
+                        game.getHUD().getHealthBar().update();
                         return true;
                     }
                 }
