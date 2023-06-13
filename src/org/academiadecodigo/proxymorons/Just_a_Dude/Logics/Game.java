@@ -13,6 +13,7 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.MyKeyboardHandler;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.MyMouseHandler;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.HUD.HUD;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import static org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Background.PADDING;
@@ -22,7 +23,7 @@ public class Game {
     private Dude dude;
     private HUD hud;
     private LinkedList<Enemy> enemies = new LinkedList<>();
-    public static LinkedList<Bullet> bullets = new LinkedList<>();
+    public static ArrayList<Bullet> bullets = new ArrayList<>();
     private MyKeyboardHandler myKeyboardHandler;
     private MyMouseHandler myMouseHandler;
     private int enemiesPerRound = 10;
