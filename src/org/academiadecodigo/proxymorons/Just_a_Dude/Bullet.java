@@ -36,6 +36,17 @@ public class Bullet extends Entity {
                 getSprite().translate(-SPEED, 0);
                 getPosition().setxAxis(getPosition().getxAxis() - SPEED);
                 break;
+            case UP_LEFT:
+            case UP_RIGHT:
+                getSprite().translate(0, -SPEED);
+                getPosition().setyAxis(getPosition().getyAxis() - SPEED);
+                break;
+            case DOWN_LEFT:
+            case DOWN_RIGHT:
+                getSprite().translate(0, SPEED);
+                getPosition().setyAxis(getPosition().getyAxis() + SPEED);
+                break;
+
         }
     }
 
