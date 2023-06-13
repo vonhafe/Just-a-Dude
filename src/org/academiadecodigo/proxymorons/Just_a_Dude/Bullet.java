@@ -94,7 +94,7 @@ public class Bullet extends Entity {
                             && point.getyAxis() >= game.getDude().getPosition().getyAxis()
                             && point.getyAxis() <= game.getDude().getPosition().getyAxis() + game.getDude().getSprite().getHeight()) {
                         game.getDude().hit();
-                        game.getHUD().getScore().updateScore();
+                        game.getHUD().getHealthBar().update();
                         return true;
                     }
                 }

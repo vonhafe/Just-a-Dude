@@ -48,7 +48,6 @@ public class Game {
 
 
     public void start() {
-        System.out.println("here");
         //startScreen.hide();
         dude.draw();
         myKeyboardHandler.init();
