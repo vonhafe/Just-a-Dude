@@ -16,6 +16,7 @@ public class Dude extends Character implements Shooter {
     private int health = 100;
     public final static int SPEED = 5;
     public boolean shooting;
+    private long lastShootTime = System.currentTimeMillis();
 
     public Dude(Position position) {
         super(position, Direction.UP, new Picture(position.getxAxis(), position.getyAxis(), "Assets/Dude/DudeStanding/Front (26x50).png"));
@@ -208,4 +209,14 @@ public class Dude extends Character implements Shooter {
     public void setShooting(boolean shooting) {
         this.shooting = shooting;
     }
+
+
+    public long getLastShootTime() {
+        return lastShootTime;
+    }
+
+    public void setLastShootTime(long lastShootTime) {
+        this.lastShootTime = lastShootTime;
+    }
+
 }

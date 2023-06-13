@@ -11,31 +11,33 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 public class MyKeyboardHandler implements KeyboardHandler {
     private Keyboard keyboard;
     private Dude dude;
+    public final static long SHOOT_DELAY = 200;
+    private long lastShootTime = System.currentTimeMillis();
 
-    public MyKeyboardHandler(Dude dude){
-        this.dude=dude;
+    public MyKeyboardHandler(Dude dude) {
+        this.dude = dude;
     }
 
-    public void init(){
-        keyboard=new Keyboard(this);
+    public void init() {
+        keyboard = new Keyboard(this);
 
-        KeyboardEvent k1=new KeyboardEvent();
+        KeyboardEvent k1 = new KeyboardEvent();
         k1.setKey(KeyboardEvent.KEY_A);
         k1.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
-        KeyboardEvent k2=new KeyboardEvent();
+        KeyboardEvent k2 = new KeyboardEvent();
         k2.setKey(KeyboardEvent.KEY_D);
         k2.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
-        KeyboardEvent k3=new KeyboardEvent();
+        KeyboardEvent k3 = new KeyboardEvent();
         k3.setKey(KeyboardEvent.KEY_W);
         k3.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
-        KeyboardEvent k4=new KeyboardEvent();
+        KeyboardEvent k4 = new KeyboardEvent();
         k4.setKey(KeyboardEvent.KEY_S);
         k4.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
-        KeyboardEvent k5= new KeyboardEvent();
+        KeyboardEvent k5 = new KeyboardEvent();
         k5.setKey(KeyboardEvent.KEY_SPACE);
         k5.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
@@ -46,6 +48,7 @@ public class MyKeyboardHandler implements KeyboardHandler {
         keyboard.addEventListener(k4);
         keyboard.addEventListener(k5);
     }
+
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
         if (!dude.isDead()) {
@@ -62,7 +65,11 @@ public class MyKeyboardHandler implements KeyboardHandler {
                 dude.move(Direction.DOWN);
             }
             if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
-                dude.shoot();
+                // Check if enough time has passed since the last shoot
+                if (System.currentTimeMillis() - dude.getLastShootTime() >= SHOOT_DELAY) {
+                    dude.shoot();
+                    dude.setLastShootTime(System.currentTimeMillis());
+                }
             }
         }
     }
@@ -71,4 +78,6 @@ public class MyKeyboardHandler implements KeyboardHandler {
     public void keyReleased(KeyboardEvent keyboardEvent) {
 
     }
+
+
 }

@@ -30,21 +30,21 @@ public class AnimationLoop {
 
                     //see synchronization, still has concurrent modification error
                     //check collision bullets
-                    for (Bullet bullet : Game.bullets) {
-                        if (bullet.isOutOfBounds() || bullet.hitEnemy(game)) {
-                            bullet.hit();
+                    for (int i = 0; i < Game.bullets.size(); i++) {
+                        if (Game.bullets.get(i).isOutOfBounds() || Game.bullets.get(i).hitEnemy(game)) {
+                            Game.bullets.get(i).hit();
                         }
-                        if (bullet.isShooting()) {
-                            bullet.updateBullet();
+                        if (Game.bullets.get(i).isShooting()) {
+                            Game.bullets.get(i).updateBullet();
                         }
 
                     }
-                    for (Bullet bullet : Game.enemyBullets) {
-                        if (bullet.isOutOfBounds() || bullet.hitDude(game)) {
-                            bullet.hit();
+                    for (int i =0;i < Game.enemyBullets.size(); i++) {
+                        if (Game.enemyBullets.get(i).isOutOfBounds() || Game.enemyBullets.get(i).hitDude(game)) {
+                            Game.enemyBullets.get(i).hit();
                         }
-                        if (bullet.isShooting()) {
-                            bullet.updateBullet();
+                        if (Game.enemyBullets.get(i).isShooting()) {
+                            Game.enemyBullets.get(i).updateBullet();
                         }
 
                     }
