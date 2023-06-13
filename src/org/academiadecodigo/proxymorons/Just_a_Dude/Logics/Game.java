@@ -80,10 +80,7 @@ public class Game {
                     randomMovements(enemy);
                 }
             }
-
-
         }
-
     }
 
     public void seekMovement(Enemy enemy){
@@ -93,7 +90,6 @@ public class Game {
         } else if (dude.getPosition().getyAxis() > enemy.getPosition().getyAxis()) {
             enemy.getPosition().setyAxis(enemy.getPosition().getyAxis() + 1);
             enemy.getSprite().translate(0, 1);
-
         }
         if (dude.getPosition().getxAxis() < enemy.getPosition().getxAxis()) {
             enemy.getPosition().setxAxis(enemy.getPosition().getxAxis() - 1);
@@ -101,7 +97,6 @@ public class Game {
         } else if (dude.getPosition().getxAxis() > enemy.getPosition().getxAxis()) {
             enemy.getPosition().setxAxis(enemy.getPosition().getxAxis() + 1);
             enemy.getSprite().translate(1, 0);
-
         }
     }
 

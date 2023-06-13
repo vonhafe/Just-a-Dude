@@ -2,19 +2,17 @@ package org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Enemy;
 
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Direction;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class StandardEnemy extends Enemy{
 
 
     public StandardEnemy(Position position, Direction direction) {
-        super(position,direction);
+        super(position,direction, new Picture(position.getxAxis(), position.getyAxis(), "Assets/Enemy/Standing/Front (22x50).png"));
+        draw();
         //setDirection(direction());
     }
 
-    @Override
-    public void draw() {
-        super.draw();
-    }
 
     @Override
     public void move(Direction direction) {
@@ -24,32 +22,59 @@ public class StandardEnemy extends Enemy{
     public void hit() {
 
     }
+
+    @Override
+    public void setDirection(Direction direction) {
+        super.setDirection(direction);
+        draw();
+    }
+
     /*
-    public Direction getDirection() {
-        return direction;
-    }
-
-    public Position getPosition() {
-        return position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
-    public Direction direction() {
-        int direction = (int) Math.ceil(Math.random() * 4);
-        switch (direction) {
-            case 1:
-                return Direction.UP;
-            case 2:
-                return Direction.RIGHT;
-            case 3:
-                return Direction.LEFT;
-            default:
-                return Direction.DOWN;
+        public Direction getDirection() {
+            return direction;
         }
+
+
+        public Position getPosition() {
+            return position;
+        }
+
+        public void setPosition(Position position) {
+            this.position = position;
+        }
+        */
+    public void draw() {
+        if (getSprite() != null){
+            getSprite().delete();
+        }
+        if (isDead()){
+            getSprite().draw();
+            return;
+        }
+
+        switch (getDirection()) {
+            case UP:
+                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Enemy/Standing/Back (22x50).png"));
+                getSprite().draw();
+                break;
+            case DOWN:
+                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Enemy/Standing/Front (22x50).png"));
+                getSprite().draw();
+                break;
+            case LEFT:
+                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Enemy/Standing/Left (28x50).png"));
+                getSprite().draw();
+                break;
+            case RIGHT:
+                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Enemy/Standing/Right (28x50).png"));
+                getSprite().draw();
+                break;
+        }
+
     }
+
+
+    /*
     public void forward(){
         //System.out.println(this.getDirection());
         if (this.getDirection().equals(Direction.UP)){
