@@ -16,7 +16,7 @@ public class AnimationLoop {
     public void start() {
 
         // !gameover
-        while (true) {
+        while (!game.isGameover()) {
                             try {
                     Thread.sleep(30);
                 } catch (InterruptedException e) {
@@ -24,6 +24,7 @@ public class AnimationLoop {
                 }
 
                 if (game.isStarted()) {
+                    game.getEndscreen().hide();
                     game.getStartScreen().hide();
                     game.moveAllEnemies(game.getEnemies());
 

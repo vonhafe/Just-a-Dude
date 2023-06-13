@@ -21,6 +21,7 @@ import java.util.LinkedList;
 import static org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Background.PADDING;
 
 public class Game {
+    private Endscreen endscreen;
     private Startscreen startScreen;
     private Background background;
     private Dude dude;
@@ -32,10 +33,11 @@ public class Game {
     private MyMouseHandler myMouseHandler;
     private int enemiesPerRound = 10;
     private boolean started;
+    public static boolean gameover;
 
     public Game() {
+        endscreen=new Endscreen();
         startScreen= new Startscreen();
-
         background = new Background();
         background.start();
         dude = new Dude(new Position(Background.getWidth() / 2, Background.getHeight() / 2));
@@ -48,7 +50,13 @@ public class Game {
 
 
     public void start() {
-        System.out.println("here");
+        if (isGameover()){
+            System.out.println("inside");
+            setGameover(false);
+            endscreen.hide();
+            dude = new Dude(new Position(Background.getWidth() / 2, Background.getHeight() / 2));
+        }
+        background.start();
         //startScreen.hide();
         dude.draw();
         myKeyboardHandler.init();
@@ -183,5 +191,17 @@ public class Game {
 
     public Startscreen getStartScreen() {
         return startScreen;
+    }
+
+    public Endscreen getEndscreen() {
+        return endscreen;
+    }
+
+    public static boolean isGameover() {
+        return gameover;
+    }
+
+    public static void setGameover(boolean gameover) {
+        Game.gameover = gameover;
     }
 }
