@@ -13,7 +13,7 @@ public class ShooterEnemy extends Enemy implements Shooter {
 
     private boolean shooting;
     public ShooterEnemy(Position position, Direction direction) {
-        super(position,direction,new Picture(position.getxAxis(), position.getyAxis(), "Assets/Dude/DudeDeath/Death (42x16).png"));
+        super(position,direction,new Picture(position.getxAxis(), position.getyAxis(), "Assets/Enemy/Standing/Front (22x50).png"));
     }
 
     @Override

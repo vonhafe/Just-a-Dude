@@ -85,10 +85,7 @@ public class Game {
                     randomMovements(enemy);
                 }
             }
-
-
         }
-
     }
 
     public void seekMovement(Enemy enemy) {
