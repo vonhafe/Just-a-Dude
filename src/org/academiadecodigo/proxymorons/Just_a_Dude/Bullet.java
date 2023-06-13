@@ -12,7 +12,6 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 public class Bullet extends Entity {
     private boolean shooting;
     public static int SPEED = 10;
-    public Position target;
 
     public Bullet(Picture bulletSprite, Direction direction, Position position) {
         super(position,direction,bulletSprite);
@@ -82,6 +81,25 @@ public class Bullet extends Entity {
                 }
             }
         }
+        return false;
+    }
+
+    public boolean  hitDude(Game game){
+        //for (Enemy enemy : game.getEnemies()){
+            if(!game.getDude().isDead()) {
+                Position[] bulletHitBox = getHitBox();
+                for (Position point : bulletHitBox) {
+                    if (point.getxAxis() >= game.getDude().getPosition().getxAxis()
+                            && point.getxAxis() <= game.getDude().getPosition().getxAxis() + game.getDude().getSprite().getWidth()
+                            && point.getyAxis() >= game.getDude().getPosition().getyAxis()
+                            && point.getyAxis() <= game.getDude().getPosition().getyAxis() + game.getDude().getSprite().getHeight()) {
+                        game.getDude().hit();
+                        game.getHUD().getScore().updateScore();
+                        return true;
+                    }
+                }
+            }
+        //}
         return false;
     }
 
