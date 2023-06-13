@@ -13,12 +13,14 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.MyKeyboardHandler;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.MyMouseHandler;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.HUD.HUD;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import java.util.LinkedList;
 
 import static org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Background.PADDING;
 
 public class Game {
+    private Startscreen startScreen;
     private Background background;
     private Dude dude;
     private HUD hud;
@@ -28,23 +30,30 @@ public class Game {
     private MyKeyboardHandler myKeyboardHandler;
     private MyMouseHandler myMouseHandler;
     private int enemiesPerRound = 10;
+    private boolean started;
 
     public Game() {
+        startScreen= new Startscreen();
+
         background = new Background();
         background.start();
         dude = new Dude(new Position(Background.getWidth() / 2, Background.getHeight() / 2));
         myKeyboardHandler = new MyKeyboardHandler(dude);
-        myMouseHandler = new MyMouseHandler(dude);
+        myMouseHandler = new MyMouseHandler(this);
         hud = new HUD(this);
 
 
     }
 
+
     public void start() {
+        System.out.println("here");
+        //startScreen.hide();
         dude.draw();
         myKeyboardHandler.init();
         myMouseHandler.init();
         createEnemies(enemiesPerRound);
+        startScreen.start();
         //sound effect
         String filepath = "Assets/Sound/background.wav";
         Music music = new Music();
@@ -52,7 +61,6 @@ public class Game {
         AnimationLoop loop = new AnimationLoop();
         loop.setGame(this);
         loop.start();
-
     }
 
     public LinkedList<Enemy> createEnemies(int numberEnemies) {
@@ -80,9 +88,15 @@ public class Game {
                         enemy.getPosition().getxAxis() < PADDING ||
                         enemy.getPosition().getxAxis() > PADDING + Background.getWidth() - enemy.getSprite().getWidth()) {
                     seekMovement(enemy);
+                    if (enemy instanceof ShooterEnemy) {
+                        ((ShooterEnemy) enemy).shootChance();
+                    }
 
                 } else {
                     randomMovements(enemy);
+                    if (enemy instanceof ShooterEnemy) {
+                        ((ShooterEnemy) enemy).shootChance();
+                    }
                 }
             }
         }
@@ -156,5 +170,17 @@ public class Game {
 
     public HUD getHUD() {
         return hud;
+    }
+
+    public boolean isStarted() {
+        return started;
+    }
+
+    public void setStarted(boolean started) {
+        this.started = started;
+    }
+
+    public Startscreen getStartScreen() {
+        return startScreen;
     }
 }

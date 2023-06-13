@@ -17,79 +17,79 @@ public class AnimationLoop {
 
         // !gameover
         while (true) {
-
-            try {
-                Thread.sleep(30);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-
-            game.moveAllEnemies(game.getEnemies());
-
-
-            //see synchronization, still has concurrent modification error
-            //check collision bullets
-            for (Bullet bullet : Game.bullets) {
-                if (bullet.isOutOfBounds() || bullet.hitEnemy(game)) {
-                    bullet.hit();
-                }
-                if (bullet.isShooting()) {
-                    bullet.updateBullet();
+                            try {
+                    Thread.sleep(30);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
 
-            }
-            for (Bullet bullet : Game.enemyBullets) {
-                if (bullet.isOutOfBounds() || bullet.hitDude(game)) {
-                    bullet.hit();
-                }
-                if (bullet.isShooting()) {
-                    bullet.updateBullet();
-                }
+                if (game.isStarted()) {
+                    game.getStartScreen().hide();
+                    game.moveAllEnemies(game.getEnemies());
 
-            }
-            //check collision enemies
-            for(Enemy enemy: game.getEnemies()){
-                if (!enemy.isDead()) {
-                    if (enemy.isTouching(game.getDude())) {
-                        game.getDude().hit();
-                        game.getHUD().getHealthBar().update();
+
+                    //see synchronization, still has concurrent modification error
+                    //check collision bullets
+                    for (Bullet bullet : Game.bullets) {
+                        if (bullet.isOutOfBounds() || bullet.hitEnemy(game)) {
+                            bullet.hit();
+                        }
+                        if (bullet.isShooting()) {
+                            bullet.updateBullet();
+                        }
+
+                    }
+                    for (Bullet bullet : Game.enemyBullets) {
+                        if (bullet.isOutOfBounds() || bullet.hitDude(game)) {
+                            bullet.hit();
+                        }
+                        if (bullet.isShooting()) {
+                            bullet.updateBullet();
+                        }
+
+                    }
+                    //check collision enemies
+                    for (Enemy enemy : game.getEnemies()) {
+                        if (!enemy.isDead()) {
+                            if (enemy.isTouching(game.getDude())) {
+                                game.getDude().hit();
+                                game.getHUD().getHealthBar().update();
+                            }
+                        }
+                    }
+
+
+                    //remove not shooting bullets
+                    for (int i = 0; i < Game.bullets.size(); i++) {
+                        Bullet bullet = Game.bullets.get(i);
+                        if (!bullet.isShooting()) {
+                            Game.bullets.remove(bullet);
+                            i--;
+                        }
+                    }
+                    for (int i = 0; i < Game.enemyBullets.size(); i++) {
+                        Bullet bullet = Game.enemyBullets.get(i);
+                        if (!bullet.isShooting()) {
+                            Game.enemyBullets.remove(bullet);
+                            i--;
+                        }
+                    }
+
+                    for (int i = 0; i < game.getEnemies().size(); i++) {
+                        Enemy enemy = game.getEnemies().get(i);
+                        if (enemy.isDead()) {
+                            game.getEnemies().remove(enemy);
+                            i--;
+                        }
+                    }
+
+                    //new round
+                    if (game.getEnemies().size() == 0) {
+                        game.getHUD().getScore().updateRound();
+                        game.setEnemiesPerRound(game.getEnemiesPerRound() + 5);
+                        game.createEnemies(game.getEnemiesPerRound());
                     }
                 }
-            }
-
-
-
-            //remove not shooting bullets
-            for (int i = 0; i < Game.bullets.size(); i++) {
-                Bullet bullet = Game.bullets.get(i);
-                if (!bullet.isShooting()) {
-                    Game.bullets.remove(bullet);
-                    i--;
-                }
-            }
-            for (int i = 0; i < Game.enemyBullets.size(); i++) {
-                Bullet bullet = Game.enemyBullets.get(i);
-                if (!bullet.isShooting()) {
-                    Game.enemyBullets.remove(bullet);
-                    i--;
-                }
-            }
-
-            for (int i = 0; i < game.getEnemies().size(); i++) {
-                Enemy enemy = game.getEnemies().get(i);
-                if (enemy.isDead()) {
-                    game.getEnemies().remove(enemy);
-                    i--;
-                }
-            }
-
-            //new round
-            if(game.getEnemies().size() == 0){
-                game.getHUD().getScore().updateRound();
-                game.setEnemiesPerRound(game.getEnemiesPerRound() + 5);
-                game.createEnemies(game.getEnemiesPerRound());
-            }
 
         }
     }

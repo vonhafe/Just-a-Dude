@@ -8,23 +8,23 @@ public class EnemyFactory {
     public static Enemy getNewEnemy(){
         if (Math.random()>0.5) {
             if (Math.random() > 0.75f) {
-                return new StandardEnemy(new Position(1280, (int) (Math.random() * 720)), Direction.LEFT);
+                return new StandardEnemy(new Position(1320, (int) (Math.random() * 720)), Direction.LEFT);
             } else if (Math.random() > 0.5f) {
-                return new StandardEnemy(new Position((int) (Math.random() * 1280), 720), Direction.UP);
+                return new StandardEnemy(new Position((int) (Math.random() * 1280), 760), Direction.UP);
             } else if (Math.random() > 0.25f) {
-                return new StandardEnemy(new Position(0, (int) (Math.random() * 720)), Direction.RIGHT);
+                return new StandardEnemy(new Position(-40, (int) (Math.random() * 720)), Direction.RIGHT);
             } else {
-                return new StandardEnemy(new Position((int) (Math.random() * 1280), 0), Direction.DOWN);
+                return new StandardEnemy(new Position((int) (Math.random() * 1280), -40), Direction.DOWN);
             }
         }else {
             if (Math.random() > 0.75f) {
-                return new ShooterEnemy(new Position(1280, (int) (Math.random() * 720)), Direction.LEFT);
+                return new ShooterEnemy(new Position(1320, (int) (Math.random() * 720)), Direction.LEFT);
             } else if (Math.random() > 0.5f) {
-                return new ShooterEnemy(new Position((int) (Math.random() * 1280), 720), Direction.UP);
+                return new ShooterEnemy(new Position((int) (Math.random() * 1280), 760), Direction.UP);
             } else if (Math.random() > 0.25f) {
-                return new ShooterEnemy(new Position(0, (int) (Math.random() * 720)), Direction.RIGHT);
+                return new ShooterEnemy(new Position(-40, (int) (Math.random() * 720)), Direction.RIGHT);
             } else {
-                return new ShooterEnemy(new Position((int) (Math.random() * 1280), 0), Direction.DOWN);
+                return new ShooterEnemy(new Position((int) (Math.random() * 1280), -40), Direction.DOWN);
             }
         }
     }
