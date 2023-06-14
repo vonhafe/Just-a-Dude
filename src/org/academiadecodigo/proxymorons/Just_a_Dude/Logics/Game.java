@@ -52,18 +52,7 @@ public class Game {
 
 
     public void start() {
-        /*if (isGameover()){
-            setGameover(false);
-            setStarted(false);
-            dude.setDead(false);
-            dude.setHealth(100);
-            dude.setDead(false);
-            endscreen.hide();
-           start();
-        }*/
         background.start();
-        System.out.println("happy");
-        //startScreen.hide();
         dude.draw();
         myKeyboardHandler.init();
         myMouseHandler.init();
