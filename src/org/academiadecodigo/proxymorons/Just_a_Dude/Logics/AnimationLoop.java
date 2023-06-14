@@ -16,7 +16,7 @@ public class AnimationLoop {
     public void start() {
 
         // !gameover
-        while (!game.isGameover()) {
+        while (true) {
                             try {
                     Thread.sleep(30);
                 } catch (InterruptedException e) {
@@ -24,7 +24,6 @@ public class AnimationLoop {
                 }
 
                 if (game.isStarted()) {
-                    game.getEndscreen().hide();
                     game.getStartScreen().hide();
                     game.moveAllEnemies(game.getEnemies());
 
@@ -85,7 +84,7 @@ public class AnimationLoop {
                     }
 
                     //new round
-                    if (game.getEnemies().size() == 0) {
+                    if (game.getEnemies().size() == 0 && !Game.isGameover()) {
                         game.getHUD().getScore().updateRound();
                         game.setEnemiesPerRound(game.getEnemiesPerRound() + 5);
                         game.createEnemies(game.getEnemiesPerRound());

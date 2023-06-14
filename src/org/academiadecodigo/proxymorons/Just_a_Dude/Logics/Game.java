@@ -12,6 +12,7 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Enemy.ShooterEnem
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.MyKeyboardHandler;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.MyMouseHandler;
+import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.HUD.BulletsLeft;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.HUD.HUD;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -26,14 +27,15 @@ public class Game {
     private Background background;
     private Dude dude;
     private HUD hud;
-    private LinkedList<Enemy> enemies = new LinkedList<>();
-    public static ArrayList<Bullet> bullets = new ArrayList<>();
-    public static ArrayList<Bullet> enemyBullets = new ArrayList<>();
+    public static LinkedList<Enemy> enemies = new LinkedList<>();
+    public static LinkedList<Bullet> bullets = new LinkedList<>();
+    public static LinkedList<Bullet> enemyBullets = new LinkedList<>();
     private MyKeyboardHandler myKeyboardHandler;
     private MyMouseHandler myMouseHandler;
     private int enemiesPerRound = 10;
-    private boolean started;
+    private static boolean started;
     public static boolean gameover;
+    public AnimationLoop loop = new AnimationLoop();
 
     public Game() {
         endscreen=new Endscreen();
@@ -50,14 +52,17 @@ public class Game {
 
 
     public void start() {
-        if (isGameover()){
-            System.out.println("inside");
+        /*if (isGameover()){
             setGameover(false);
+            setStarted(false);
+            dude.setDead(false);
+            dude.setHealth(100);
+            dude.setDead(false);
             endscreen.hide();
-            dude = new Dude(new Position(Background.getWidth() / 2, Background.getHeight() / 2));
-        }
+           start();
+        }*/
         background.start();
-
+        System.out.println("happy");
         //startScreen.hide();
         dude.draw();
         myKeyboardHandler.init();
@@ -68,7 +73,7 @@ public class Game {
         String filepath = "Assets/Sound/background.wav";
         Music music = new Music();
         music.backgroundMusic(filepath);
-        AnimationLoop loop = new AnimationLoop();
+        //AnimationLoop loop = new AnimationLoop();
         loop.setGame(this);
         loop.start();
     }
@@ -178,7 +183,7 @@ public class Game {
         return hud;
     }
 
-    public boolean isStarted() {
+    public static boolean isStarted() {
         return started;
     }
 
@@ -200,5 +205,47 @@ public class Game {
 
     public static void setGameover(boolean gameover) {
         Game.gameover = gameover;
+    }
+    public void reset(){
+        setStarted(true);
+        setGameover(false);
+        endscreen.hide();
+        dude.reset();
+        enemiesPerRound = 5;
+        hud.getHealthBar().update();
+        hud.getScore().setScore(-1);
+        hud.getScore().updateScore();
+        hud.getScore().setRoundNumber(-1);
+        hud.getScore().updateRound();
+        BulletsLeft.setBulletsLeft(15);
+        BulletsLeft.resetBulletsLeft();
+        HUD.resetReload();
+
+
+
+
+       // AnimationLoop loop = new AnimationLoop();
+        //loop.setGame(this);
+        //loop.start();
+    }
+    public static void clean(){
+        for (Enemy enemy : enemies){
+            enemy.getSprite().delete();
+        }
+        while(!enemies.isEmpty()){
+            enemies.remove();
+        }
+        for (Bullet bullet : bullets){
+            bullet.getSprite().delete();
+        }
+        while(!bullets.isEmpty()){
+            bullets.remove();
+        }
+        for (Bullet bullet : enemyBullets){
+            bullet.getSprite().delete();
+        }
+        while(!enemyBullets.isEmpty()){
+            enemyBullets.remove();
+        }
     }
 }

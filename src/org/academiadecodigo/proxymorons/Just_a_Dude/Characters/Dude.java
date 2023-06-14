@@ -275,6 +275,7 @@ public class Dude extends Character implements Shooter {
                 setDead(true);
                 Game.gameover=true;
                 Endscreen.start();
+                Game.clean();
             }
         }
     }
@@ -311,6 +312,15 @@ public class Dude extends Character implements Shooter {
 
     public void setLastShootTime(long lastShootTime) {
         this.lastShootTime = lastShootTime;
+    }
+
+    public void reset(){
+        setHealth(100);
+        setDead(false);
+        setPosition(new Position(Background.getWidth() / 2, Background.getHeight() / 2));
+        setDirection(Direction.DOWN);
+        draw();
+        shots = 0;
     }
 
 }

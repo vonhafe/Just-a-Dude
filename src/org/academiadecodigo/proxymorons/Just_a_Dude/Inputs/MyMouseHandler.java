@@ -27,10 +27,12 @@ public class MyMouseHandler implements MouseHandler {
         //System.out.println("Someone clicked with the mouse!");
         //System.out.println("They clicked at " + mouseEvent.getX() + " x coordinate");
         //System.out.println("They clicked at " + mouseEvent.getY() + " y coordinate");
-        if (!game.isGameover()){
+        if (!game.isStarted()){
             game.setStarted(true);
-        } else {
-            game.start();
+
+        }
+        if (game.isGameover()){
+            game.reset();
         }
     }
 

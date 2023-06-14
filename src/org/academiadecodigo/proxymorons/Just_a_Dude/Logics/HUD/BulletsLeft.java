@@ -36,4 +36,8 @@ public class BulletsLeft {
         bulletsLeftText = new Text(1100, 700,"BULLETS: " + getBulletsLeft());
         drawBulletsScore();
     }
+
+    public static void setBulletsLeft(int bulletsLeft) {
+        BulletsLeft.bulletsLeft = bulletsLeft;
+    }
 }

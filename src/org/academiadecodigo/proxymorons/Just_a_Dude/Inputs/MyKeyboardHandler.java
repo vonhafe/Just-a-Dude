@@ -90,20 +90,22 @@ public class MyKeyboardHandler implements KeyboardHandler {
 
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
-        if (!dude.isDead()) {
-            pressedKeys.add(keyboardEvent.getKey());
+        if (Game.isStarted()){
+            if (!dude.isDead()) {
+                pressedKeys.add(keyboardEvent.getKey());
 
-            handleMovement();
+                handleMovement();
 
-            if (pressedKeys.contains(KeyboardEvent.KEY_SPACE)) {
-                // Check if enough time has passed since the last shoot
-                if (System.currentTimeMillis() - dude.getLastShootTime() >= SHOOT_DELAY) {
-                    dude.shoot();
-                    dude.setLastShootTime(System.currentTimeMillis());
+                if (pressedKeys.contains(KeyboardEvent.KEY_SPACE)) {
+                    // Check if enough time has passed since the last shoot
+                    if (System.currentTimeMillis() - dude.getLastShootTime() >= SHOOT_DELAY) {
+                        dude.shoot();
+                        dude.setLastShootTime(System.currentTimeMillis());
+                    }
                 }
-            }
-            if (pressedKeys.contains(KeyboardEvent.KEY_R)) {
-                dude.reload();
+                if (pressedKeys.contains(KeyboardEvent.KEY_R)) {
+                    dude.reload();
+                }
             }
         }
     }
