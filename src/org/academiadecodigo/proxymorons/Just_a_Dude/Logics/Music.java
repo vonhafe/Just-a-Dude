@@ -6,6 +6,7 @@ import javax.sound.sampled.Clip;
 import java.io.File;
 
 public class Music {
+    private Clip clip;
 
     public void clipSound(String filepath) {
         try {
@@ -13,7 +14,7 @@ public class Music {
 
             if (musicPath.exists()) {
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
-                Clip clip = AudioSystem.getClip();
+                clip = AudioSystem.getClip();
                 clip.open(audioInput);
                 clip.start();
                 //clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -44,4 +45,12 @@ public class Music {
             e.printStackTrace();
         }
     }
+
+    public void stopMusic(){
+        if(clip != null && clip.isRunning()){
+            clip.stop();
+            clip.close();
+        }
+    }
+
 }

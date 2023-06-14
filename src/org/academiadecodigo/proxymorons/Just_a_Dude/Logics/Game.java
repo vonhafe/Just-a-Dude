@@ -26,6 +26,7 @@ public class Game {
     private MyKeyboardHandler myKeyboardHandler;
     private MyMouseHandler myMouseHandler;
     private int enemiesPerRound = 10;
+    private Music music = new Music();
 
     public Game() {
         background = new Background();
@@ -45,7 +46,6 @@ public class Game {
         createEnemies(enemiesPerRound);
         //sound effect
         String filepath = "Assets/Sound/background.wav";
-        Music music = new Music();
         music.backgroundMusic(filepath);
         AnimationLoop loop = new AnimationLoop();
         loop.setGame(this);
