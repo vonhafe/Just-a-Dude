@@ -62,6 +62,36 @@ public class ShooterEnemy extends Enemy implements Shooter {
         //music.clipSound(filepath);
     }
 
+    public void draw() {
+        if (getSprite() != null){
+            getSprite().delete();
+        }
+        if (isDead()){
+            getSprite().draw();
+            return;
+        }
+
+        switch (getDirection()) {
+            case UP:
+                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/ShooterEnemy/SkeletonFront.png"));
+                getSprite().draw();
+                break;
+            case DOWN:
+                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/ShooterEnemy/SkeletonBack.png"));
+                getSprite().draw();
+                break;
+            case LEFT:
+                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/ShooterEnemy/SkeletonLeft.png"));
+                getSprite().draw();
+                break;
+            case RIGHT:
+                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/ShooterEnemy/SkeletonRight.png"));
+                getSprite().draw();
+                break;
+        }
+
+    }
+
     @Override
     public void setShooting(boolean shooting) {
         this.shooting=shooting;

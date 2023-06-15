@@ -84,7 +84,7 @@ public class AnimationLoop {
                     }
 
                     //new round
-                    if (game.getEnemies().size() == 0) {
+                    if (game.getEnemies().size() == 0 && !Game.isGameover()) {
                         game.getHUD().getScore().updateRound();
                         game.setEnemiesPerRound(game.getEnemiesPerRound() + 5);
                         game.createEnemies(game.getEnemiesPerRound());

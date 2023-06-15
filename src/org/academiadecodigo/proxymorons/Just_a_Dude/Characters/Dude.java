@@ -3,6 +3,7 @@ package org.academiadecodigo.proxymorons.Just_a_Dude.Characters;
 
 import org.academiadecodigo.proxymorons.Just_a_Dude.Bullet;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Background;
+import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Endscreen;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Game;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.HUD.BulletsLeft;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.HUD.HUD;
@@ -280,6 +281,9 @@ public class Dude extends Character implements Shooter {
                 music.stopMusic(filepath);
                 String filepath2 = "Assets/Sound/gameOver.wav";
                 music.clipSound(filepath2);
+                Game.gameover=true;
+                Endscreen.start();
+                Game.clean();
             }
         }
     }
@@ -316,6 +320,16 @@ public class Dude extends Character implements Shooter {
 
     public void setLastShootTime(long lastShootTime) {
         this.lastShootTime = lastShootTime;
+    }
+
+    public void reset(){
+        setHealth(100);
+        setDead(false);
+        setPosition(new Position(Background.getWidth() / 2, Background.getHeight() / 2));
+        setDirection(Direction.DOWN);
+        draw();
+        music.backgroundMusic(filepath);
+        shots = 0;
     }
 
 }
