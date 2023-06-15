@@ -110,11 +110,11 @@ public abstract class Enemy extends Character {
 
     public void dies() {
         setDead(true);
-        getSprite().delete();
         //sound effect
         String filepath = "Assets/Sound/die.wav";
         Music music = new Music();
         music.clipSound(filepath);
+        getSprite().delete();
     }
 
 }

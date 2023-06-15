@@ -20,6 +20,7 @@ public class Dude extends Character implements Shooter {
     private int shots = 0;
     private boolean shooting;
     private long lastShootTime = System.currentTimeMillis();
+    private int spriteChanger=4;
 
     public Dude(Position position) {
         super(position, Direction.UP, new Picture(position.getxAxis(), position.getyAxis(), "Assets/Dude/DudeStanding/Front (26x50).png"));
@@ -39,7 +40,20 @@ public class Dude extends Character implements Shooter {
                 if (isShooting()) {
                     setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeShooting/BackShooting/BackShooting1 (26x50).png"));
                 } else {
-                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back2 (26x50).png"));
+                    if (spriteChanger%16==0||spriteChanger%16==1||spriteChanger%16==2||spriteChanger%16==3){
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back1 (26x48).png"));
+                       spriteChanger++;
+                    } else if (spriteChanger%16==4||spriteChanger%16==5||spriteChanger%16==6||spriteChanger%16==7) {
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back2 (26x50).png"));
+                        spriteChanger++;
+                    } else if (spriteChanger%16==8||spriteChanger%16==9||spriteChanger%16==10||spriteChanger%16==11) {
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back3 (26x48).png"));
+                        spriteChanger++;
+                    }else{
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back4 (26x50).png"));
+                        spriteChanger++;
+                    }
+                    //setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back2 (26x50).png"));
                 }
                 getSprite().draw();
                 break;
@@ -47,7 +61,19 @@ public class Dude extends Character implements Shooter {
                 if (isShooting()) {
                     setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeShooting/FrontShooting/FrontShooting1 (26x48).png"));
                 } else {
-                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Front/Front2 (26 x 50).png"));
+                    if (spriteChanger%16==0||spriteChanger%16==1||spriteChanger%16==2||spriteChanger%16==3){
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Front/Front1 (26x48).png"));
+                        spriteChanger++;
+                    } else if (spriteChanger%16==4||spriteChanger%16==5||spriteChanger%16==6||spriteChanger%16==7) {
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Front/Front2 (26 x 50).png"));
+                        spriteChanger++;
+                    } else if (spriteChanger%16==8||spriteChanger%16==9||spriteChanger%16==10||spriteChanger%16==11) {
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Front/Front3 (26x48).png"));
+                        spriteChanger++;
+                    }else{
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Front/Front4 (26 x 50).png"));
+                        spriteChanger++;
+                    }
                 }
                 getSprite().draw();
                 break;
@@ -55,7 +81,19 @@ public class Dude extends Character implements Shooter {
                 if (isShooting()) {
                     setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeShooting/LeftShooting/LeftShooting1 (36x48).png"));
                 } else {
-                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Left/Left1 (24x48).png"));
+                    if (spriteChanger%16==0||spriteChanger%16==1||spriteChanger%16==2||spriteChanger%16==3){
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Left/Left1 (24x48).png"));
+                        spriteChanger++;
+                    } else if (spriteChanger%16==4||spriteChanger%16==5||spriteChanger%16==6||spriteChanger%16==7) {
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Left/Left2 (12x25).png"));
+                        spriteChanger++;
+                    } else if (spriteChanger%16==8||spriteChanger%16==9||spriteChanger%16==10||spriteChanger%16==11) {
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Left/Left3 (12x24).png"));
+                        spriteChanger++;
+                    }else{
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Left/Left4 (12x25).png"));
+                        spriteChanger++;
+                    }
                 }
                 getSprite().draw();
                 break;
@@ -63,7 +101,19 @@ public class Dude extends Character implements Shooter {
                 if (isShooting()) {
                     setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeShooting/RightShooting/RightShooting1 (36x48).png"));
                 } else {
-                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Right/Right1 (24x48).png"));
+                    if (spriteChanger%16==0||spriteChanger%16==1||spriteChanger%16==2||spriteChanger%16==3){
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Right/Right1 (24x48).png"));
+                        spriteChanger++;
+                    } else if (spriteChanger%16==4||spriteChanger%16==5||spriteChanger%16==6||spriteChanger%16==7) {
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Right/Right2 (12x25).png"));
+                        spriteChanger++;
+                    } else if (spriteChanger%16==8||spriteChanger%16==9||spriteChanger%16==10||spriteChanger%16==11) {
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Right/Right3 (12x24).png"));
+                        spriteChanger++;
+                    }else{
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Right/Right4 (12x25).png"));
+                        spriteChanger++;
+                    }
                 }
                 getSprite().draw();
                 break;
@@ -71,7 +121,19 @@ public class Dude extends Character implements Shooter {
                 if (isShooting()) {
                     setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeShooting/BackShooting/BackShooting1 (26x50).png"));
                 } else {
-                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back2 (26x50).png"));
+                    if (spriteChanger%16==0||spriteChanger%16==1||spriteChanger%16==2||spriteChanger%16==3){
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back1 (26x48).png"));
+                        spriteChanger++;
+                    } else if (spriteChanger%16==4||spriteChanger%16==5||spriteChanger%16==6||spriteChanger%16==7) {
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back2 (26x50).png"));
+                        spriteChanger++;
+                    } else if (spriteChanger%16==8||spriteChanger%16==9||spriteChanger%16==10||spriteChanger%16==11) {
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back3 (26x48).png"));
+                        spriteChanger++;
+                    }else{
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back4 (26x50).png"));
+                        spriteChanger++;
+                    }
                 }
                 getSprite().draw();
                 break;
@@ -79,7 +141,19 @@ public class Dude extends Character implements Shooter {
                 if (isShooting()) {
                     setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeShooting/BackShooting/BackShooting1 (26x50).png"));
                 } else {
-                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back2 (26x50).png"));
+                    if (spriteChanger%16==0||spriteChanger%16==1||spriteChanger%16==2||spriteChanger%16==3){
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back1 (26x48).png"));
+                        spriteChanger++;
+                    } else if (spriteChanger%16==4||spriteChanger%16==5||spriteChanger%16==6||spriteChanger%16==7) {
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back2 (26x50).png"));
+                        spriteChanger++;
+                    } else if (spriteChanger%16==8||spriteChanger%16==9||spriteChanger%16==10||spriteChanger%16==11) {
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back3 (26x48).png"));
+                        spriteChanger++;
+                    }else{
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back4 (26x50).png"));
+                        spriteChanger++;
+                    }
                 }
                 getSprite().draw();
                 break;
@@ -87,7 +161,19 @@ public class Dude extends Character implements Shooter {
                 if (isShooting()) {
                     setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeShooting/FrontShooting/FrontShooting1 (26x48).png"));
                 } else {
-                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Front/Front2 (26 x 50).png"));
+                    if (spriteChanger%16==0||spriteChanger%16==1||spriteChanger%16==2||spriteChanger%16==3){
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Front/Front1 (26x48).png"));
+                        spriteChanger++;
+                    } else if (spriteChanger%16==4||spriteChanger%16==5||spriteChanger%16==6||spriteChanger%16==7) {
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Front/Front2 (26 x 50).png"));
+                        spriteChanger++;
+                    } else if (spriteChanger%16==8||spriteChanger%16==9||spriteChanger%16==10||spriteChanger%16==11) {
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Front/Front3 (26x48).png"));
+                        spriteChanger++;
+                    }else{
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Front/Front4 (26 x 50).png"));
+                        spriteChanger++;
+                    }
                 }
                 getSprite().draw();
                 break;
@@ -95,7 +181,19 @@ public class Dude extends Character implements Shooter {
                 if (isShooting()) {
                     setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeShooting/FrontShooting/FrontShooting1 (26x48).png"));
                 } else {
-                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Front/Front2 (26 x 50).png"));
+                    if (spriteChanger%16==0||spriteChanger%16==1||spriteChanger%16==2||spriteChanger%16==3){
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Front/Front1 (26x48).png"));
+                        spriteChanger++;
+                    } else if (spriteChanger%16==4||spriteChanger%16==5||spriteChanger%16==6||spriteChanger%16==7) {
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Front/Front2 (26 x 50).png"));
+                        spriteChanger++;
+                    } else if (spriteChanger%16==8||spriteChanger%16==9||spriteChanger%16==10||spriteChanger%16==11) {
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Front/Front3 (26x48).png"));
+                        spriteChanger++;
+                    }else{
+                        setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Front/Front4 (26 x 50).png"));
+                        spriteChanger++;
+                    }
                 }
                 getSprite().draw();
                 break;
