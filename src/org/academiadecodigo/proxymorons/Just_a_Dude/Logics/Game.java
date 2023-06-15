@@ -14,6 +14,7 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.MyKeyboardHandler;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.MyMouseHandler;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.HUD.BulletsLeft;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.HUD.HUD;
+import org.academiadecodigo.proxymorons.Just_a_Dude.Potion;
 
 import java.util.LinkedList;
 
@@ -28,6 +29,7 @@ public class Game {
     public static LinkedList<Enemy> enemies = new LinkedList<>();
     public static LinkedList<Bullet> bullets = new LinkedList<>();
     public static LinkedList<Bullet> enemyBullets = new LinkedList<>();
+    public static LinkedList<Potion> potions = new LinkedList<>();
     private MyKeyboardHandler myKeyboardHandler;
     private MyMouseHandler myMouseHandler;
     private int enemiesPerRound = 10;
@@ -185,6 +187,10 @@ public class Game {
 
     public static boolean isGameover() {
         return gameover;
+    }
+
+    public static LinkedList<Potion> getPotions() {
+        return potions;
     }
 
     public static void setGameover(boolean gameover) {

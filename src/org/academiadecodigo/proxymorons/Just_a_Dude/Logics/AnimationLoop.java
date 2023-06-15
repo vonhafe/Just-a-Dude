@@ -2,6 +2,7 @@ package org.academiadecodigo.proxymorons.Just_a_Dude.Logics;
 
 import org.academiadecodigo.proxymorons.Just_a_Dude.Bullet;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Enemy.Enemy;
+import org.academiadecodigo.proxymorons.Just_a_Dude.Potion;
 
 public class AnimationLoop {
 
@@ -53,6 +54,22 @@ public class AnimationLoop {
                             game.getDude().hit();
                             game.getHUD().getHealthBar().update();
                         }
+                    }
+                }
+
+                for (Potion potion : Game.potions){
+                    if (game.getDude().isTouching(potion)) {
+                        game.getDude().heal();
+                        potion.setUsed(true);
+                        game.getHUD().getHealthBar().update();
+                        potion.hide();
+                    }
+                }
+                for (int i = 0; i < Game.potions.size(); i++) {
+                    Potion potion = Game.potions.get(i);
+                    if (potion.isUsed()) {
+                        Game.potions.remove(potion);
+                        i--;
                     }
                 }
 

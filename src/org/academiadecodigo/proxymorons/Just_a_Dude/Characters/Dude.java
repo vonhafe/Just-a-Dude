@@ -386,6 +386,14 @@ public class Dude extends Character implements Shooter {
         draw();
     }
 
+    public void heal(){
+        if (health+20<100) {
+            health += 20;
+        }else {
+            health=100;
+        }
+    }
+
     public int getHealth() {
         return health;
     }

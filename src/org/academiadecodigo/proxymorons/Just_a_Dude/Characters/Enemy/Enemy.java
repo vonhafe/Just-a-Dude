@@ -4,7 +4,9 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Character;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Direction;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Entity;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
+import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Game;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Music;
+import org.academiadecodigo.proxymorons.Just_a_Dude.Potion;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public abstract class Enemy extends Character {
@@ -115,6 +117,12 @@ public abstract class Enemy extends Character {
         Music music = new Music();
         music.clipSound(filepath);
         getSprite().delete();
+        if (Math.random()>0.9f){
+            Potion potion = new Potion(getPosition(),Direction.UP,new Picture(getPosition().getxAxis(),getPosition().getyAxis(),"Assets/Items/potion.png"));
+            System.out.println("here");
+            Game.potions.add(potion);
+            potion.draw();
+        }
     }
 
 }
