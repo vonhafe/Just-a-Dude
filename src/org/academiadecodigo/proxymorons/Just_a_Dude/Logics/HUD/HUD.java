@@ -1,6 +1,5 @@
 package org.academiadecodigo.proxymorons.Just_a_Dude.Logics.HUD;
 
-import org.academiadecodigo.proxymorons.Just_a_Dude.Bullet;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Dude;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Game;
 import org.academiadecodigo.simplegraphics.graphics.Color;
@@ -28,19 +27,12 @@ public class HUD {
         return score;
     }
 
-    public BulletsLeft getBulletsLeft() {
-        return bulletsLeft;
-    }
-
     public static void reloadDraw() {
         if (reload != null) {return;}
         reload = new Text(670, 650, "Press 'R' to reload");
         reload.draw();
         reload.grow(110, 15);
         reload.setColor(Color.RED);
-    }
-    public void setReload(Text reload) {
-        this.reload = reload;
     }
 
     public static void resetReload(){

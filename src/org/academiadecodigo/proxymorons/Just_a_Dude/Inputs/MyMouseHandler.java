@@ -1,7 +1,5 @@
 package org.academiadecodigo.proxymorons.Just_a_Dude.Inputs;
 
-import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Dude;
-import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Game;
 import org.academiadecodigo.simplegraphics.mouse.Mouse;
 import org.academiadecodigo.simplegraphics.mouse.MouseEvent;

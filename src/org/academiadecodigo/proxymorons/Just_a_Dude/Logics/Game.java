@@ -14,9 +14,7 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.MyKeyboardHandler;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.MyMouseHandler;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.HUD.BulletsLeft;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.HUD.HUD;
-import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import static org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Background.PADDING;
@@ -46,8 +44,6 @@ public class Game {
         myKeyboardHandler = new MyKeyboardHandler(dude);
         myMouseHandler = new MyMouseHandler(this);
         hud = new HUD(this);
-
-
     }
 
 
@@ -124,7 +120,6 @@ public class Game {
     }
 
     public void randomMovements(Enemy enemy) {
-
         int chance = (int) Math.ceil(Math.random() * 1000);
         if (enemy.getPosition().getxAxis() == Background.getWidth() - enemy.getSprite().getWidth() + PADDING - 1) {
             enemy.getPosition().setxAxis(enemy.getPosition().getxAxis() - 1);
@@ -209,13 +204,6 @@ public class Game {
         BulletsLeft.setBulletsLeft(15);
         BulletsLeft.resetBulletsLeft();
         HUD.resetReload();
-
-
-
-
-       // AnimationLoop loop = new AnimationLoop();
-        //loop.setGame(this);
-        //loop.start();
     }
     public static void clean(){
         for (Enemy enemy : enemies){

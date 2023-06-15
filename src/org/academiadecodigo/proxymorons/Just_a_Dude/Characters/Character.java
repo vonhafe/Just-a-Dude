@@ -1,9 +1,7 @@
 package org.academiadecodigo.proxymorons.Just_a_Dude.Characters;
 
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-import java.awt.*;
 
 public abstract class Character extends Entity{
     private int health;

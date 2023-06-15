@@ -4,7 +4,6 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Direction;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
 
 public class EnemyFactory {
-    private Direction direction;
     public static Enemy getNewEnemy(){
         if (Math.random()>0.5) {
             if (Math.random() > 0.75f) {

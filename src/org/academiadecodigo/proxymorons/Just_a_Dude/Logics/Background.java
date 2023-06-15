@@ -1,6 +1,5 @@
 package org.academiadecodigo.proxymorons.Just_a_Dude.Logics;
 
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Background {
