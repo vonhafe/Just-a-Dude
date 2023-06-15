@@ -20,9 +20,12 @@ public class Dude extends Character implements Shooter {
     private int shots = 0;
     private boolean shooting;
     private long lastShootTime = System.currentTimeMillis();
+    private Music music = new Music();
+    private String filepath = "Assets/Sound/background.wav";
 
     public Dude(Position position) {
         super(position, Direction.UP, new Picture(position.getxAxis(), position.getyAxis(), "Assets/Dude/DudeStanding/Front (26x50).png"));
+        music.backgroundMusic(filepath);
     }
 
     public void draw() {
@@ -254,7 +257,6 @@ public class Dude extends Character implements Shooter {
         setShooting(false);
         //sound effect
         String filepath = "Assets/Sound/shoot.wav";
-        Music music = new Music();
         music.clipSound(filepath);
     }
 
@@ -262,6 +264,9 @@ public class Dude extends Character implements Shooter {
         shots = 0;
         HUD.resetReload();
         BulletsLeft.resetBulletsLeft();
+        //sound effect
+        String filepath = "Assets/Sound/reload.wav";
+        music.clipSound(filepath);
     }
     public Position[] getHitBox() {
         return super.getHitBox();
@@ -273,6 +278,9 @@ public class Dude extends Character implements Shooter {
             if (health <= 0) {
                 health = 0;
                 setDead(true);
+                music.stopMusic(filepath);
+                String filepath2 = "Assets/Sound/gameOver.wav";
+                music.clipSound(filepath2);
                 Game.gameover=true;
                 Endscreen.start();
                 Game.clean();
@@ -320,6 +328,7 @@ public class Dude extends Character implements Shooter {
         setPosition(new Position(Background.getWidth() / 2, Background.getHeight() / 2));
         setDirection(Direction.DOWN);
         draw();
+        music.backgroundMusic(filepath);
         shots = 0;
     }
 

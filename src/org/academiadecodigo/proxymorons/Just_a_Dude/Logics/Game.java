@@ -38,6 +38,7 @@ public class Game {
     public AnimationLoop loop = new AnimationLoop();
 
     public Game() {
+
         endscreen=new Endscreen();
         startScreen= new Startscreen();
         background = new Background();
@@ -58,11 +59,7 @@ public class Game {
         myMouseHandler.init();
         createEnemies(enemiesPerRound);
         startScreen.start();
-        //sound effect
-        String filepath = "Assets/Sound/background.wav";
-        Music music = new Music();
-        music.backgroundMusic(filepath);
-        //AnimationLoop loop = new AnimationLoop();
+        AnimationLoop loop = new AnimationLoop();
         loop.setGame(this);
         loop.start();
     }

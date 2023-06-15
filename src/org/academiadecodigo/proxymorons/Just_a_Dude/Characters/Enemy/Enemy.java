@@ -12,6 +12,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 public abstract class Enemy extends Character {
 
     private int speed=1;
+    private Music music = new Music();
 
 
     public Enemy(Position position, Direction direction, Picture picture){
@@ -116,7 +117,6 @@ public abstract class Enemy extends Character {
         setDead(true);
         //sound effect
         String filepath = "Assets/Sound/die.wav";
-        Music music = new Music();
         music.clipSound(filepath);
         getSprite().delete();
     }
