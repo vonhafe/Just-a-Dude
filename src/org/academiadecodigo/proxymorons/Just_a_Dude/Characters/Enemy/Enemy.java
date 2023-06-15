@@ -12,9 +12,11 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 public abstract class Enemy extends Character {
 
     private int speed=1;
+    private Music music = new Music();
 
-    public Enemy(Position position, Direction direction){
-        super(position,direction,new Picture(position.getxAxis(), position.getyAxis(), "Assets/Enemy/Standing/Front1 (24 x 44).png"));
+
+    public Enemy(Position position, Direction direction, Picture picture){
+        super(position,direction,picture);
         draw();
     }
 
@@ -115,7 +117,6 @@ public abstract class Enemy extends Character {
         setDead(true);
         //sound effect
         String filepath = "Assets/Sound/die.wav";
-        Music music = new Music();
         music.clipSound(filepath);
         getSprite().delete();
     }

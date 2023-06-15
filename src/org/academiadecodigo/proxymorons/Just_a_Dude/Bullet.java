@@ -6,13 +6,11 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Entity;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Background;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Game;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Bullet extends Entity {
     private boolean shooting;
     public static int SPEED = 10;
-    public Position target;
 
     public Bullet(Picture bulletSprite, Direction direction, Position position) {
         super(position,direction,bulletSprite);
@@ -38,6 +36,17 @@ public class Bullet extends Entity {
                 getSprite().translate(-SPEED, 0);
                 getPosition().setxAxis(getPosition().getxAxis() - SPEED);
                 break;
+            case UP_LEFT:
+            case UP_RIGHT:
+                getSprite().translate(0, -SPEED);
+                getPosition().setyAxis(getPosition().getyAxis() - SPEED);
+                break;
+            case DOWN_LEFT:
+            case DOWN_RIGHT:
+                getSprite().translate(0, SPEED);
+                getPosition().setyAxis(getPosition().getyAxis() + SPEED);
+                break;
+
         }
     }
 
@@ -82,6 +91,25 @@ public class Bullet extends Entity {
                 }
             }
         }
+        return false;
+    }
+
+    public boolean  hitDude(Game game){
+        //for (Enemy enemy : game.getEnemies()){
+            if(!game.getDude().isDead()) {
+                Position[] bulletHitBox = getHitBox();
+                for (Position point : bulletHitBox) {
+                    if (point.getxAxis() >= game.getDude().getPosition().getxAxis()
+                            && point.getxAxis() <= game.getDude().getPosition().getxAxis() + game.getDude().getSprite().getWidth()
+                            && point.getyAxis() >= game.getDude().getPosition().getyAxis()
+                            && point.getyAxis() <= game.getDude().getPosition().getyAxis() + game.getDude().getSprite().getHeight()) {
+                        game.getDude().hit();
+                        game.getHUD().getHealthBar().update();
+                        return true;
+                    }
+                }
+            }
+        //}
         return false;
     }
 

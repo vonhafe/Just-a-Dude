@@ -4,35 +4,41 @@ package org.academiadecodigo.proxymorons.Just_a_Dude.Characters;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Bullet;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Background;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Game;
+import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.HUD.BulletsLeft;
+import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.HUD.HUD;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Music;
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import static org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Background.PADDING;
-import static org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Background.getWidth;
 
 public class Dude extends Character implements Shooter {
     private int health = 100;
     public final static int SPEED = 5;
-    public boolean shooting;
+    public final static int DIAGONAL_SPEED = (int) (Math.sqrt((SPEED*SPEED)/2));
+    public final static int BULLETLIMIT = 15;
+    private int shots = 0;
+    private boolean shooting;
+    private long lastShootTime = System.currentTimeMillis();
+    private Music music = new Music();
+    private String filepath = "Assets/Sound/background.wav";
 
     public Dude(Position position) {
         super(position, Direction.UP, new Picture(position.getxAxis(), position.getyAxis(), "Assets/Dude/DudeStanding/Front (26x50).png"));
+        music.backgroundMusic(filepath);
     }
 
     public void draw() {
-        if (getSprite() != null){
+        if (getSprite() != null) {
             getSprite().delete();
         }
-        if (isDead()){
+        if (isDead()) {
             getSprite().draw();
             return;
         }
 
-        switch (getDirection()){
+        switch (getDirection()) {
             case UP:
-                if (isShooting()){
+                if (isShooting()) {
                     setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeShooting/BackShooting/BackShooting1 (26x50).png"));
                 } else {
                     setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back2 (26x50).png"));
@@ -40,7 +46,7 @@ public class Dude extends Character implements Shooter {
                 getSprite().draw();
                 break;
             case DOWN:
-                if (isShooting()){
+                if (isShooting()) {
                     setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeShooting/FrontShooting/FrontShooting1 (26x48).png"));
                 } else {
                     setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Front/Front2 (26 x 50).png"));
@@ -48,7 +54,7 @@ public class Dude extends Character implements Shooter {
                 getSprite().draw();
                 break;
             case LEFT:
-                if (isShooting()){
+                if (isShooting()) {
                     setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeShooting/LeftShooting/LeftShooting1 (36x48).png"));
                 } else {
                     setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Left/Left1 (24x48).png"));
@@ -56,14 +62,45 @@ public class Dude extends Character implements Shooter {
                 getSprite().draw();
                 break;
             case RIGHT:
-                if (isShooting()){
+                if (isShooting()) {
                     setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeShooting/RightShooting/RightShooting1 (36x48).png"));
                 } else {
                     setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Right/Right1 (24x48).png"));
                 }
                 getSprite().draw();
                 break;
-
+            case UP_LEFT:
+                if (isShooting()) {
+                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeShooting/BackShooting/BackShooting1 (26x50).png"));
+                } else {
+                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back2 (26x50).png"));
+                }
+                getSprite().draw();
+                break;
+            case UP_RIGHT:
+                if (isShooting()) {
+                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeShooting/BackShooting/BackShooting1 (26x50).png"));
+                } else {
+                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Back/Back2 (26x50).png"));
+                }
+                getSprite().draw();
+                break;
+            case DOWN_LEFT:
+                if (isShooting()) {
+                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeShooting/FrontShooting/FrontShooting1 (26x48).png"));
+                } else {
+                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Front/Front2 (26 x 50).png"));
+                }
+                getSprite().draw();
+                break;
+            case DOWN_RIGHT:
+                if (isShooting()) {
+                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeShooting/FrontShooting/FrontShooting1 (26x48).png"));
+                } else {
+                    setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/Dude/DudeWalking/Front/Front2 (26 x 50).png"));
+                }
+                getSprite().draw();
+                break;
         }
 
     }
@@ -81,8 +118,6 @@ public class Dude extends Character implements Shooter {
                     setDirection(Direction.DOWN);
                     getSprite().translate(0, -getSprite().getY() + PADDING);
                     getPosition().setyAxis(PADDING);
-                    //System.out.println(getSprite().getY());
-                    //System.out.println(getPosition().getyAxis());
                 }
                 break;
             case RIGHT:
@@ -93,10 +128,8 @@ public class Dude extends Character implements Shooter {
                     getPosition().setxAxis(getPosition().getxAxis() + SPEED);
                 } else {
                     setDirection(Direction.LEFT);
-                    getSprite().translate(Background.getWidth()-(getSprite().getX()-PADDING)-getSprite().getWidth(), 0);
-                    getPosition().setxAxis(PADDING+Background.getWidth()-getSprite().getWidth());
-                    //System.out.println(getSprite().getX());
-                    //System.out.println(getPosition().getxAxis());
+                    getSprite().translate(Background.getWidth() - (getSprite().getX() - PADDING) - getSprite().getWidth(), 0);
+                    getPosition().setxAxis(PADDING + Background.getWidth() - getSprite().getWidth());
                 }
                 break;
             case DOWN:
@@ -109,8 +142,6 @@ public class Dude extends Character implements Shooter {
                     setDirection(Direction.UP);
                     getSprite().translate(0, Background.getHeight() - (getSprite().getY() - PADDING) - getSprite().getHeight());
                     getPosition().setyAxis(PADDING + Background.getHeight() - getSprite().getHeight());
-                    //System.out.println(getSprite().getY());
-                    //System.out.println(getPosition().getyAxis());
                 }
                 break;
             case LEFT:
@@ -123,18 +154,68 @@ public class Dude extends Character implements Shooter {
                     setDirection(Direction.RIGHT);
                     getSprite().translate(-getSprite().getX() + PADDING, 0);
                     getPosition().setxAxis(PADDING);
-                    //System.out.println(getSprite().getX());
-                    //System.out.println(getPosition().getxAxis());
                 }
+                break;
+            case UP_LEFT:
+                if (getPosition().getyAxis() - DIAGONAL_SPEED > PADDING && getPosition().getxAxis() - DIAGONAL_SPEED > PADDING) {
+                    setDirection(Direction.UP_LEFT);
+                    draw();
+                    getSprite().translate(-DIAGONAL_SPEED, -DIAGONAL_SPEED);
+                    getPosition().setyAxis(getPosition().getyAxis() - DIAGONAL_SPEED);
+                    getPosition().setxAxis(getPosition().getxAxis() - DIAGONAL_SPEED);
+                } else {
+                    getSprite().translate(0,0);
+                }
+                break;
+            case UP_RIGHT:
+                if (getPosition().getyAxis() - DIAGONAL_SPEED > PADDING && getPosition().getxAxis() + SPEED < PADDING + Background.getWidth() - getSprite().getWidth()) {
+                    setDirection(Direction.UP_RIGHT);
+                    draw();
+                    getSprite().translate(DIAGONAL_SPEED, -DIAGONAL_SPEED);
+                    getPosition().setyAxis(getPosition().getyAxis() - DIAGONAL_SPEED);
+                    getPosition().setxAxis(getPosition().getxAxis() + DIAGONAL_SPEED);
+                } else {
+                    getSprite().translate(0,0);
+                }
+                break;
+            case DOWN_LEFT:
+                if (getPosition().getyAxis() + DIAGONAL_SPEED < PADDING + Background.getHeight() - getSprite().getHeight() && getPosition().getxAxis() - SPEED > PADDING) {
+                    setDirection(Direction.DOWN_LEFT);
+                    draw();
+                    getSprite().translate(-DIAGONAL_SPEED, DIAGONAL_SPEED);
+                    getPosition().setyAxis(getPosition().getyAxis() + DIAGONAL_SPEED);
+                    getPosition().setxAxis(getPosition().getxAxis() - DIAGONAL_SPEED);
+                } else {
+                    getSprite().translate(0,0);
+                }
+                break;
+            case DOWN_RIGHT:
+                if (getPosition().getyAxis() + SPEED < PADDING + Background.getHeight() - getSprite().getHeight() && getPosition().getxAxis() + SPEED < PADDING + Background.getWidth() - getSprite().getWidth()) {
+                    setDirection(Direction.DOWN_RIGHT);
+                    draw();
+                    getSprite().translate(DIAGONAL_SPEED, DIAGONAL_SPEED);
+                    getPosition().setyAxis(getPosition().getyAxis() + DIAGONAL_SPEED);
+                    getPosition().setxAxis(getPosition().getxAxis() + DIAGONAL_SPEED);
+                } else {
+                    getSprite().translate(0,0);
+                }
+                break;
+            default:
                 break;
         }
     }
 
     public void shoot() {
+        if(shots == BULLETLIMIT){
+            return;
+        }
+        if (shots == BULLETLIMIT - 1){
+            HUD.reloadDraw();
+        }
         setShooting(true);
         draw();
-        int x = ((getSprite().getX() + (getSprite().getX() + getSprite().getWidth()))/2);
-        int y = ((getSprite().getY() + (getSprite().getY() + getSprite().getHeight()))/2);
+        int x = ((getSprite().getX() + (getSprite().getX() + getSprite().getWidth())) / 2);
+        int y = ((getSprite().getY() + (getSprite().getY() + getSprite().getHeight())) / 2);
         Picture bulletSprite = new Picture();
         switch (getDirection()) {
             case DOWN:
@@ -153,26 +234,42 @@ public class Dude extends Character implements Shooter {
                 Picture right = new Picture(x, y, "Assets/Bullet/BulletRight (8x6).png");
                 bulletSprite = right;
                 break;
+            case UP_LEFT:
+            case UP_RIGHT:
+                Picture ups = new Picture(x, y, "Assets/Bullet/BulletFront (6x8).png");
+                bulletSprite = ups;
+                break;
+            case DOWN_LEFT:
+            case DOWN_RIGHT:
+                Picture downs = new Picture(x, y, "Assets/Bullet/BulletDown (6x8).png");
+                bulletSprite = downs;
+                break;
+
+
         }
         bulletSprite.draw();
         Position tempPos = new Position(x, y);
         Bullet bullet = new Bullet(bulletSprite, getDirection(), tempPos);
         Game.bullets.add(bullet);
+        shots++;
+        BulletsLeft.updateScore();
         setShooting(false);
         //sound effect
         String filepath = "Assets/Sound/shoot.wav";
-        Music music = new Music();
         music.clipSound(filepath);
     }
 
-
-
-
-
+    public void reload() {
+        shots = 0;
+        HUD.resetReload();
+        BulletsLeft.resetBulletsLeft();
+        //sound effect
+        String filepath = "Assets/Sound/reload.wav";
+        music.clipSound(filepath);
+    }
     public Position[] getHitBox() {
         return super.getHitBox();
     }
-
 
     public void hit(){
         if (!isDead()) {
@@ -180,6 +277,9 @@ public class Dude extends Character implements Shooter {
             if (health <= 0) {
                 health = 0;
                 setDead(true);
+                music.stopMusic(filepath);
+                String filepath2 = "Assets/Sound/gameOver.wav";
+                music.clipSound(filepath2);
             }
         }
     }
@@ -208,4 +308,14 @@ public class Dude extends Character implements Shooter {
     public void setShooting(boolean shooting) {
         this.shooting = shooting;
     }
+
+
+    public long getLastShootTime() {
+        return lastShootTime;
+    }
+
+    public void setLastShootTime(long lastShootTime) {
+        this.lastShootTime = lastShootTime;
+    }
+
 }
