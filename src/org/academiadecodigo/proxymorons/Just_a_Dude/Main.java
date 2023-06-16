@@ -9,6 +9,6 @@ public class Main {
         Canvas.setMaxX(1290);
         Game game= new Game();
         game.start();
-
+//missing jar stuff and firing fixed
     }
 }
