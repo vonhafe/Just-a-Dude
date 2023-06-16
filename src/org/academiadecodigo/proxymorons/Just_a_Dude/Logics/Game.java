@@ -36,6 +36,7 @@ public class Game {
     private int enemiesPerRound = 10;
     private static boolean started;
     public static boolean gameover;
+    public static Music music;
     public AnimationLoop loop = new AnimationLoop();
 
     public Game() {
@@ -59,7 +60,7 @@ public class Game {
         startScreen.start();
         //sound effect
         String filepath = ResourceHandler.PREFIX + "background.wav";
-        Music music = new Music(filepath);
+        music = new Music(filepath);
         music.playLoop(true);
         //AnimationLoop loop = new AnimationLoop();
         loop.setGame(this);
@@ -211,6 +212,7 @@ public class Game {
         BulletsLeft.setBulletsLeft(15);
         BulletsLeft.resetBulletsLeft();
         HUD.resetReload();
+        music.playLoop(true);
     }
     public static void clean(){
         for (Enemy enemy : enemies){

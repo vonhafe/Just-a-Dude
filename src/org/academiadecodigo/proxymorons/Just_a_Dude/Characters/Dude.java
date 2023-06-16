@@ -21,6 +21,7 @@ public class Dude extends Character implements Shooter {
     private int shots = 0;
     private boolean shooting;
     private long lastShootTime = System.currentTimeMillis();
+    private long lastReloadTime = System.currentTimeMillis();
     private int spriteChanger=4;
 
     public Dude(Position position) {
@@ -361,6 +362,9 @@ public class Dude extends Character implements Shooter {
         shots = 0;
         HUD.resetReload();
         BulletsLeft.resetBulletsLeft();
+        String filepath = ResourceHandler.PREFIX+"reload.wav";
+        Music music = new Music(filepath);
+        music.play(true);
     }
     public Position[] getHitBox() {
         return super.getHitBox();
@@ -375,6 +379,11 @@ public class Dude extends Character implements Shooter {
                 Game.gameover=true;
                 Endscreen.start();
                 Game.clean();
+
+                Game.music.stop();
+                String filepath2 = ResourceHandler.PREFIX+"gameOver.wav";
+                Music music2 = new Music(filepath2);
+                music2.play(true);
             }
         }
     }
@@ -419,6 +428,14 @@ public class Dude extends Character implements Shooter {
 
     public void setLastShootTime(long lastShootTime) {
         this.lastShootTime = lastShootTime;
+    }
+
+    public long getLastReloadTime() {
+        return lastReloadTime;
+    }
+
+    public void setLastReloadTime(long lastReloadTime) {
+        this.lastReloadTime = lastReloadTime;
     }
 
     public void reset(){

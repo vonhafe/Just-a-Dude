@@ -15,7 +15,7 @@ public class MyKeyboardHandler implements KeyboardHandler {
     private Keyboard keyboard;
     private Dude dude;
     public final static long SHOOT_DELAY = 200;
-    private long lastShootTime = System.currentTimeMillis();
+    public final static long RELOAD_DELAY = 3000;
     private Set<Integer> pressedKeys = new HashSet<>();
 
     public MyKeyboardHandler(Dude dude) {
@@ -104,7 +104,10 @@ public class MyKeyboardHandler implements KeyboardHandler {
                     }
                 }
                 if (pressedKeys.contains(KeyboardEvent.KEY_R)) {
-                    dude.reload();
+                    if (System.currentTimeMillis() - dude.getLastReloadTime() >= RELOAD_DELAY) {
+                        dude.reload();
+                        dude.setLastReloadTime(System.currentTimeMillis());
+                    }
                 }
             }
         }

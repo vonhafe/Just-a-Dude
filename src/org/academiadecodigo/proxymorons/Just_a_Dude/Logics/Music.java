@@ -52,6 +52,7 @@ import java.net.URL;
 }*/
 
 //Jar
+
 public class Music {
     private Clip clip;
 
