@@ -315,19 +315,19 @@ public class Dude extends Character implements Shooter {
         Picture bulletSprite = new Picture();
         switch (getDirection()) {
             case DOWN:
-                Picture down = new Picture(x, y, "Assets/Bullet/BulletDown (6x8).png");
+                Picture down = new Picture(x-2, y+20, "Assets/Bullet/BulletDown (6x8).png");
                 bulletSprite = down;
                 break;
             case UP:
-                Picture up = new Picture(x, y, "Assets/Bullet/BulletFront (6x8).png");
+                Picture up = new Picture(x-2, y-30, "Assets/Bullet/BulletFront (6x8).png");
                 bulletSprite = up;
                 break;
             case LEFT:
-                Picture left = new Picture(x, y, "Assets/Bullet/BulletLeft (8x6).png");
+                Picture left = new Picture(x-20, y-2, "Assets/Bullet/BulletLeft (8x6).png");
                 bulletSprite = left;
                 break;
             case RIGHT:
-                Picture right = new Picture(x, y, "Assets/Bullet/BulletRight (8x6).png");
+                Picture right = new Picture(x+20, y-2, "Assets/Bullet/BulletRight (8x6).png");
                 bulletSprite = right;
                 break;
             case UP_LEFT:

@@ -119,7 +119,6 @@ public abstract class Enemy extends Character {
         getSprite().delete();
         if (Math.random()>0.9f){
             Potion potion = new Potion(getPosition(),Direction.UP,new Picture(getPosition().getxAxis(),getPosition().getyAxis(),"Assets/Items/potion.png"));
-            System.out.println("here");
             Game.potions.add(potion);
             potion.draw();
         }
