@@ -4,6 +4,7 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Bullet;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Direction;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Shooter;
+import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.ResourceHandler;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Game;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -11,7 +12,7 @@ public class ShooterEnemy extends Enemy implements Shooter {
 
     private boolean shooting;
     public ShooterEnemy(Position position, Direction direction) {
-        super(position,direction,new Picture(position.getxAxis(), position.getyAxis(), "Assets/Enemy/Standing/Front (22x50).png"));
+        super(position,direction,new Picture(position.getxAxis(), position.getyAxis(), ResourceHandler.PREFIX+"SkeletonFront.png"));
     }
 
     @Override
@@ -32,19 +33,19 @@ public class ShooterEnemy extends Enemy implements Shooter {
         Picture bulletSprite = new Picture();
         switch (getDirection()) {
             case DOWN:
-                Picture down = new Picture(x, y, "Assets/Bullet/BulletDown (6x8).png");
+                Picture down = new Picture(x, y,ResourceHandler.PREFIX+ "BulletDown.png");
                 bulletSprite = down;
                 break;
             case UP:
-                Picture up = new Picture(x, y, "Assets/Bullet/BulletFront (6x8).png");
+                Picture up = new Picture(x, y,ResourceHandler.PREFIX+ "BulletFront.png");
                 bulletSprite = up;
                 break;
             case LEFT:
-                Picture left = new Picture(x, y, "Assets/Bullet/BulletLeft (8x6).png");
+                Picture left = new Picture(x, y,ResourceHandler.PREFIX+ "BulletLeft.png");
                 bulletSprite = left;
                 break;
             case RIGHT:
-                Picture right = new Picture(x, y, "Assets/Bullet/BulletRight (8x6).png");
+                Picture right = new Picture(x, y,ResourceHandler.PREFIX+ "BulletRight.png");
                 bulletSprite = right;
                 break;
         }
@@ -71,19 +72,19 @@ public class ShooterEnemy extends Enemy implements Shooter {
 
         switch (getDirection()) {
             case UP:
-                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/ShooterEnemy/SkeletonFront.png"));
+                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), ResourceHandler.PREFIX+"SkeletonFront.png"));
                 getSprite().draw();
                 break;
             case DOWN:
-                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/ShooterEnemy/SkeletonBack.png"));
+                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), ResourceHandler.PREFIX+"SkeletonBack.png"));
                 getSprite().draw();
                 break;
             case LEFT:
-                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/ShooterEnemy/SkeletonLeft.png"));
+                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), ResourceHandler.PREFIX+"SkeletonLeft.png"));
                 getSprite().draw();
                 break;
             case RIGHT:
-                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), "Assets/ShooterEnemy/SkeletonRight.png"));
+                setSprite(new Picture(getPosition().getxAxis(), getPosition().getyAxis(), ResourceHandler.PREFIX+"SkeletonRight.png"));
                 getSprite().draw();
                 break;
         }

@@ -12,6 +12,7 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Enemy.ShooterEnem
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.MyKeyboardHandler;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.MyMouseHandler;
+import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.ResourceHandler;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.HUD.BulletsLeft;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.HUD.HUD;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Potion;
@@ -57,7 +58,7 @@ public class Game {
         createEnemies(enemiesPerRound);
         startScreen.start();
         //sound effect
-        String filepath = "Assets/Sound/background.wav";
+        String filepath = ResourceHandler.PREFIX+"background.wav";
         Music music = new Music();
         music.backgroundMusic(filepath);
         //AnimationLoop loop = new AnimationLoop();

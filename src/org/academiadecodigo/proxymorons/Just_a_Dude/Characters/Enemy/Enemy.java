@@ -4,6 +4,7 @@ import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Character;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Direction;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Entity;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Characters.Position;
+import org.academiadecodigo.proxymorons.Just_a_Dude.Inputs.ResourceHandler;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Game;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Logics.Music;
 import org.academiadecodigo.proxymorons.Just_a_Dude.Potion;
@@ -113,12 +114,12 @@ public abstract class Enemy extends Character {
     public void dies() {
         setDead(true);
         //sound effect
-        String filepath = "Assets/Sound/die.wav";
+        String filepath = ResourceHandler.PREFIX+"die.wav";
         Music music = new Music();
         music.clipSound(filepath);
         getSprite().delete();
         if (Math.random()>0.9f){
-            Potion potion = new Potion(getPosition(),Direction.UP,new Picture(getPosition().getxAxis(),getPosition().getyAxis(),"Assets/Items/potion.png"));
+            Potion potion = new Potion(getPosition(),Direction.UP,new Picture(getPosition().getxAxis(),getPosition().getyAxis(),ResourceHandler.PREFIX+"potion.png"));
             Game.potions.add(potion);
             potion.draw();
         }
