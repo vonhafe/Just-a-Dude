@@ -58,9 +58,9 @@ public class Game {
         createEnemies(enemiesPerRound);
         startScreen.start();
         //sound effect
-        String filepath = ResourceHandler.PREFIX+"background.wav";
-        Music music = new Music();
-        music.backgroundMusic(filepath);
+        String filepath = ResourceHandler.PREFIX + "background.wav";
+        Music music = new Music(filepath);
+        music.playLoop(true);
         //AnimationLoop loop = new AnimationLoop();
         loop.setGame(this);
         loop.start();

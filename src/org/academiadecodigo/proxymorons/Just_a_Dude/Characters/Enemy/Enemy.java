@@ -115,8 +115,8 @@ public abstract class Enemy extends Character {
         setDead(true);
         //sound effect
         String filepath = ResourceHandler.PREFIX+"die.wav";
-        Music music = new Music();
-        music.clipSound(filepath);
+        Music music = new Music(filepath) ;
+        music.play(true);
         getSprite().delete();
         if (Math.random()>0.9f){
             Potion potion = new Potion(getPosition(),Direction.UP,new Picture(getPosition().getxAxis(),getPosition().getyAxis(),ResourceHandler.PREFIX+"potion.png"));

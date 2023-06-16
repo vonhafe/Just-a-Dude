@@ -353,8 +353,8 @@ public class Dude extends Character implements Shooter {
         setShooting(false);
         //sound effect
         String filepath = ResourceHandler.PREFIX+"shoot.wav";
-        Music music = new Music();
-        music.clipSound(filepath);
+        Music music = new Music(filepath);
+        music.play(true);
     }
 
     public void reload() {
